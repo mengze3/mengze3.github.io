@@ -9,17 +9,25 @@ redirect_from:
 
 {% include base_path %}
 
-Work experience
-======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+Student Training Research Program(SRTP)
+======
+* Apr 2022 - Jun 2023: Group Leader
+  * Duties included: Tagging issues
+  * Supervisor: Professor Fei Gao
+ 
+High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments:
+A Learning-Enhanced Hierarchical Framework
+======
+* June 2023 - Nov 2023: Research Assistant
+  * Duties included: Tagging issues
+  * Supervisor: Professor Fei Gao
+ 
+ Learning-Aided Fixed-Wing with Path Stealth
+======
+* June 2023 - Nov 2023: Research Assistant
+  * Duties included: Tagging issues
+  * Supervisor: Professor Fei Gao 
   
 Skills
 ======
@@ -29,7 +37,3 @@ Skills
   * Sub-skill 2.2
   * Sub-skill 2.3
 * Skill 3
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
