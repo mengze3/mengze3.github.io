@@ -18,6 +18,14 @@ Student Training Research Program(SRTP)
     * Image recognition
   * Supervisor: Professor Fei Gao
 
+ 
+ Learning-Aided Stealthy Fixed-Wing
+======
+* June 2023 - Nov 2023: Research Assistant
+  * Duties included:
+    * DJI cooperation
+    * Terrain data generation and model training
+  * Supervisor: Professor Fei Gao
 
 High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments:
 A Learning-Enhanced Hierarchical Framework
@@ -27,13 +35,4 @@ A Learning-Enhanced Hierarchical Framework
     * Optimization of the network structure
     * Benchmark
     * Training the network
-  * Supervisor: Professor Fei Gao
-
- 
- Learning-Aided Stealthy Fixed-Wing
-======
-* June 2023 - Nov 2023: Research Assistant
-  * Duties included:
-    * DJI cooperation
-    * Terrain data generation and model training
   * Supervisor: Professor Fei Gao
