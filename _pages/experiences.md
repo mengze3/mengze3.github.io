@@ -28,6 +28,7 @@ A Learning-Enhanced Hierarchical Framework
     * Benchmark
     * Training the network
   * Supervisor: Professor Fei Gao
+
  
  Learning-Aided Stealthy Fixed-Wing
 ======
@@ -35,4 +36,4 @@ A Learning-Enhanced Hierarchical Framework
   * Duties included:
     * DJI cooperation
     * Terrain data generation and model training
-  * Supervisor: Professor Fei Gao 
+  * Supervisor: Professor Fei Gao
