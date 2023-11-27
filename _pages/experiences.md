@@ -9,8 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-National-Level Student Training Research Program(SRTP)ssssssssssssssssssssssssssssssssssssssssssssss
-sssssssssssssssssssssss
+National-Level Student Training Research Program(SRTP)
 ======
 * Apr 2022 - Jun 2023: Group Leader
   * Duties included:
@@ -28,6 +27,7 @@ Learning-Aided Stealthy Fixed-Wing
   * Supervisor: Professor Fei Gao
 
 High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments
+======
 A Learning-Enhanced Hierarchical Framework
 ======
 * June 2023 - Nov 2023: Research Assistant
