@@ -12,7 +12,6 @@ Hi there! Welcome to my personal homepage. I am an undergraduate student studyin
 
 Education
 ======
-
 Zhejiang University
 ------
 Bachelor Degree in Control Sicence and Engineering, Sep. 2020 - Jun. 2024(Expected)
