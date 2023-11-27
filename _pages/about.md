@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Hi there! Welcome to my personal homepage. I am an undergraduate student studying at [Zhejiang University](https://www.zju.edu.cn/), majoring in [Control Science and Engineering](http://www.cse.zju.edu.cn/). Now I am a research assistant at [FastLab](http://zju-fast.com/). My research interests primarily lie in the field of robotic planning and control, with a particular focus on learning-enhanced path planning stratgies.
+Hi there! Welcome to my personal homepage. I am an undergraduate student studying at [Zhejiang University](https://www.zju.edu.cn/), majoring in [Control Science and Engineering](http://www.cse.zju.edu.cn/). Now I am a research assistant at [FastLab](http://zju-fast.com/). My research interests primarily lie in the field of robotic planning and control, with a particular focus on learning-enhanced path planning strategies.
 
 Education
 ======
