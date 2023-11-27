@@ -9,7 +9,6 @@ redirect_from:
 
 {% include base_path %}
 
-
 Student Training Research Program(SRTP)
 ======
 * Apr 2022 - Jun 2023: Group Leader
@@ -19,7 +18,7 @@ Student Training Research Program(SRTP)
   * Supervisor: Professor Fei Gao
 
  
- Learning-Aided Stealthy Fixed-Wing
+Learning-Aided Stealthy Fixed-Wing
 ======
 * June 2023 - Nov 2023: Research Assistant
   * Duties included:
