@@ -1,6 +1,6 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "Aerial-Robots"
+excerpt: "Enhancement of a UAV's autonomous hovering and motion control using differential flatness and an advanced SE(3) control strategy departing from traditional linear methodologies.<br/><img src='/images/500x300.png'>"
 collection: portfolio
 ---
 
