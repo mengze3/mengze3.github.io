@@ -10,12 +10,15 @@ redirect_from:
 {% include base_path %}
 
 
+
 Student Training Research Program(SRTP)
 ======
 * Apr 2022 - Jun 2023: Group Leader
   * Duties included: Tagging issues
   * Supervisor: Professor Fei Gao
- 
+
+
+
 High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments:
 A Learning-Enhanced Hierarchical Framework
 ======
