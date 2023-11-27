@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Hi there! Welcome to my personal homepage. I’ m an undergraduate student studying at Zhejiang University, majoring in Control Science and Engineering. Now I am a research assistant at FastLab. My research interests primarily lie in the field of robotic path planning and control, with a particular focus on learning-enhanced path planning and control stratgies.
+Hi there! Welcome to my personal homepage. I’ m an undergraduate student studying at Zhejiang University, majoring in Control Science and Engineering. Now I am a research assistant at FastLab. My research interests primarily lie in the field of robotic planning and control, with a particular focus on learning-enhanced path planning stratgies.
 
 A data-driven personal website
 ======
