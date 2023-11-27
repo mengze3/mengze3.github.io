@@ -23,7 +23,7 @@ A Learning-Enhanced Hierarchical Framework
   * Duties included: Tagging issues
   * Supervisor: Professor Fei Gao
  
- Learning-Aided Fixed-Wing with Path Stealth
+ Learning-Aided Stealthy Fixed-Wing
 ======
 * June 2023 - Nov 2023: Research Assistant
   * Duties included: Tagging issues
