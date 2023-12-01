@@ -11,11 +11,14 @@ redirect_from:
 
 National-Level Student Training Research Program(SRTP)
 ======
-* Apr 2022 - Jun 2023: Group Leader (<a href="/_pages/srtp.html">report</a>)
+* Apr 2022 - Jun 2023: Group Leader
   * Duties included:
     * Development of a complete UAV system by integrating key components
     * Image recognition
   * Supervisor: Professor Fei Gao
+<button class="collapsible">detail</button>
+<div class="content" style="display:none;">
+    <p>这里是你想要展示的详细内容。</p>
 
 
 High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments: A Learning-Enhanced Hierarchical Framework
