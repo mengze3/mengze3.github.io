@@ -21,7 +21,7 @@ National-Level Student Training Research Program(SRTP)
 
 High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments: A Learning-Enhanced Hierarchical Framework
 ======
-* June 2023 - Nov 2023: Research Assistant(<a href="/_pages/car.html">report</a>)
+* June 2023 - Nov 2023: Research Assistant([report](https://mengze3.github.io/car/))
   * Duties included:
     * Optimization of the network structure
     * Benchmark
@@ -30,7 +30,7 @@ High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environm
  
 Learning-Aided Stealthy Fixed-Wing
 ======
-* June 2023 - Nov 2023: Research Assistant(<a href="/_pages/fixed_wing.html">report</a>)
+* June 2023 - Nov 2023: Research Assistant([report](https://mengze3.github.io/fixed_wing/))
   * Duties included:
     * DJI cooperation
     * Terrain data generation and model training
