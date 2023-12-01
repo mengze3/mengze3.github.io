@@ -9,7 +9,7 @@ redirect_from:
 
 {% include base_path %}
 
-National-Level Student Training Research Program(SRTP)
+Vision-Based Object Tracking for UAV in National-level Student Research Training Program (SRTP)
 ======
 * Apr 2022 - Jun 2023: Group Leader ([report](https://mengze3.github.io/srtp/))
   * Duties included:
@@ -19,7 +19,7 @@ National-Level Student Training Research Program(SRTP)
   * Supervisor: Professor Fei Gao
 
 
-High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments: A Learning-Enhanced Hierarchical Framework
+Transformer-based Trajectory Planning for Robots: Extending to UAVs and UGVs
 ======
 * June 2023 - Nov 2023: Research Assistant([report](https://mengze3.github.io/car/))
   * Duties included:
@@ -28,7 +28,7 @@ High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environm
     * Training the network
   * Supervisor: Professor Fei Gao
  
-Learning-Aided Stealthy Fixed-Wing
+Fixed-Wing Long-Range Covert Flight Optimization in Collaboration between DJI and Fast Lab
 ======
 * June 2023 - Nov 2023: Research Assistant([report](https://mengze3.github.io/fixed_wing/))
   * Duties included:
