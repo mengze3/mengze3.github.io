@@ -11,7 +11,7 @@ redirect_from:
 
 National-Level Student Training Research Program(SRTP)
 ======
-* Apr 2022 - Jun 2023: Group Leader (<a href="srtp.html">report</a>)
+* Apr 2022 - Jun 2023: Group Leader (<a href="/_pages/srtp.html">report</a>)
   * Duties included:
     * Development of a complete UAV system by integrating key components
     * Image recognition
@@ -20,7 +20,7 @@ National-Level Student Training Research Program(SRTP)
 
 High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environments: A Learning-Enhanced Hierarchical Framework
 ======
-* June 2023 - Nov 2023: Research Assistant(<a href="car.html">report</a>)
+* June 2023 - Nov 2023: Research Assistant(<a href="/_pages/car.html">report</a>)
   * Duties included:
     * Optimization of the network structure
     * Benchmark
@@ -29,7 +29,7 @@ High-Quality Vehicle Trajectory Planning with Time Stability in Complex Environm
  
 Learning-Aided Stealthy Fixed-Wing
 ======
-* June 2023 - Nov 2023: Research Assistant(<a href="fixed_wing.html">report</a>)
+* June 2023 - Nov 2023: Research Assistant(<a href="/_pages/fixed_wing.html">report</a>)
   * Duties included:
     * DJI cooperation
     * Terrain data generation and model training
