@@ -11,7 +11,7 @@ redirect_from:
 
 National-Level Student Training Research Program(SRTP)
 ======
-* Apr 2022 - Jun 2023: Group Leader(<a href="/_pages/srtp.html">report</a>)
+* Apr 2022 - Jun 2023: Group Leader(<a href="srtp.html">report</a>)
   * Duties included:
   * Duties included:
     * Development of a complete UAV system by integrating key components
