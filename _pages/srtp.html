@@ -118,4 +118,14 @@ This visible region is designed to account for potential occlusions and to guide
       the system demonstrates exceptionally high reliability and efficiency.</p>
 
 
+    <img src="https://github.com/mengze3/mengze3.github.io/blob/2a12037a0b6628c7cc9cf14e5cf4312e5e556653/_pages/yolo.png?raw=true" alt="improved detection">
+    <p>The left side of the image shows examples of objects identified by the trained model, while the right side displays charts of various training metrics. 
+      These charts include changes in the loss function, as well as variations in evaluation metrics such as precision, recall, and mean Average Precision (mAP).</p>
+    <p>Loss Function: The train/box_loss, train/obj_loss, train/cls_loss, and corresponding validation set losses val/box_loss, val/obj_loss, 
+      val/cls_loss all show a gradual decrease with increasing training epochs, indicating that the model is progressively improving, learning to better identify and classify objects.</p>
+    <p>Precision and Recall: The metrics/precision and metrics/recall charts show that both these metrics are high, close to 1.0, 
+      indicating that the model can correctly identify most true positives and rarely misclassifies negatives as positives.</p>
+    <p>Mean Average Precision (mAP): The metrics/mAP_0.5 and metrics/mAP_0.5:0.95 represent the mAP at IoU (Intersection over Union) thresholds of 0.5 and between 0.5 to 0.95, respectively. 
+      Both of these metrics also exhibit high values, especially the metrics/mAP_0.5 is near perfect, signifying that the model performs well across different IoU thresholds</p>
+  
 </body>
