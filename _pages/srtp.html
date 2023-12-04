@@ -12,19 +12,43 @@ redirect_from:
 
 {% include base_path %}
 
+<head>
+    <style>
+        .container {
+            display: flex; /* Use Flexbox for layout */
+            align-items: start; /* Align items at the start of the container */
+        }
+        .video {
+            width: 50%; /* Assign 50% width for the video */
+            padding-right: 10px; /* Add some space between video and text */
+        }
+        .text {
+            width: 50%; /* Assign 50% width for the text */
+        }
+        iframe {
+            width: 100%; /* Make the video responsive */
+            height: 300px; /* Set a fixed height for the video */
+        }
+    </style>
+</head>
+
 
 <body>
 
 
     <h1>Project overview</h1>
 
-  <iframe src="//player.bilibili.com/player.html?aid=975694433&bvid=BV1o44y1b7wC&cid=412685370&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-</div>
-
-<p>Leading a national-level Student Research Training Program (SRTP) titled "Vision-Based Object Tracking for UAV," 
-  I orchestrated the development of a complete UAV system by integrating key components: mapping, planning, 
-  target recognition, localization, and control. Building upon FastLab's Elastic tracker as a foundation, 
-  I have enhanced the robustness of the recognition algorithm.</p>
+      <div class="container">
+          <div class="video">
+              <iframe src="//player.bilibili.com/player.html?aid=975694433&bvid=BV1o44y1b7wC&cid=412685370&p=1" frameborder="no" allowfullscreen="true"></iframe>
+          </div>
+          <div class="text">
+              <p>Leading a national-level Student Research Training Program (SRTP) titled "Vision-Based Object Tracking for UAV," 
+              I orchestrated the development of a complete UAV system by integrating key components: mapping, planning, 
+              target recognition, localization, and control. Building upon FastLab's Elastic tracker as a foundation, 
+              I have enhanced the robustness of the recognition algorithm.</p>
+          </div>
+      </div>
     <!-- 大标题 -->
     <h1>Target tracking and control</h1>
 
