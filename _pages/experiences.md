@@ -13,7 +13,6 @@ Vision-Based Object Tracking for UAV in National-level Student Research Training
 ======
 * Apr 2022 - Jun 2023: Group Leader ([report](https://mengze3.github.io/srtp/))
   * Duties included:
-  * Duties included:
     * Development of a complete UAV system by integrating key components
     * Image recognition
   * Supervisor: Professor Fei Gao
