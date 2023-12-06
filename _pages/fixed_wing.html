@@ -43,7 +43,9 @@ redirect_from:
 
 
     <h1>Neural Path Planning</h1>
-    <img  width="560" height="480" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
+    <div class="center">
+      <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
+  </div>
     <p>A neural network path planner was proposed to learn data for trajectory optimization. It reads information from maps and poses. The structure is divided into three layers: 
       feature extraction layer, global distribution layer, and local correction layer. The feature extraction layer is used to extract information from maps and poses; 
       the global distribution layer aims to locate the general area of the path; the local correction layer focuses on finding the precise locations of these path points in the area. 
@@ -52,8 +54,16 @@ redirect_from:
       providing a better initial value for the backend. I have applied this method on Ackerman vehicles and achieved certain results.</p>
     <!-- 大标题 -->
     <h1>Fixed-Wing Long-Range Covert Flight </h1>
-
-<iframe width="840" height="500" src="//player.bilibili.com/player.html?aid=366865413&bvid=BV1f94y1j78r&cid=1354193017&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+    <div class="center">
+      <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
+  </div>
+<p>The generation of global trajectories for fixed-wing aircraft follows a hierarchical framework. Initially, a sampling-based dynamic path planning algorithm is used, 
+  targeting exploration within the global environment to find a better path topology. The paths generated in this step are not smooth and may not be entirely dynamically feasible. 
+  To address this issue, a numerical optimization-based algorithm is employed to further optimize the output of the previous step in the continuous state space. 
+  This ensures stealth in flight while effectively improving the smoothness and dynamic feasibility of the trajectory. 
+  Due to the order of magnitude difference in the map size and the altitude range of the aircraft, the trajectory planning problem is modeled as a two-dimensional trajectory generation problem. 
+  Here, the aircraft is set to maintain a constant altitude of 60 meters, 
+  with a flight speed of 150 meters per second. Mountainous terrains on the map exceeding 60 meters in height are treated as impassable obstacles.</p>
     
    <h2>Hierarchical Multi-goal Path Finding</h2>
   <div class="center">
