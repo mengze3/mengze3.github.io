@@ -43,18 +43,13 @@ redirect_from:
 
 
     <h1>Neural Path Planning</h1>
-
-      <div class="container">
-          <div class="video">
-              <iframe src="//player.bilibili.com/player.html?aid=975694433&bvid=BV1o44y1b7wC&cid=412685370&p=1" frameborder="no" allowfullscreen="true"></iframe>
-          </div>
-          <div class="text">
-              <p>Leading a national-level Student Research Training Program (SRTP) titled "Vision-Based Object Tracking for UAV," 
-              I orchestrated the development of a complete UAV system by integrating key components: mapping, planning, 
-              target recognition, localization, and control. Building upon FastLab's Elastic tracker as a foundation, 
-              I have enhanced the robustness of the recognition algorithm.</p>
-          </div>
-      </div>
+    <img  width="560" height="480" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
+    <p>A neural network path planner was proposed to learn data for trajectory optimization. It reads information from maps and poses. The structure is divided into three layers: 
+      feature extraction layer, global distribution layer, and local correction layer. The feature extraction layer is used to extract information from maps and poses; 
+      the global distribution layer aims to locate the general area of the path; the local correction layer focuses on finding the precise locations of these path points in the area. 
+      This approach has three advantages. First, because it is a neural network, its inference speed is relatively stable. Second, the neural network size can be made very small, enhancing its efficiency. 
+      Third, since it learns data from backend trajectory optimization, it takes into account the process of backend trajectory optimization, 
+      providing a better initial value for the backend. I have applied this method on Ackerman vehicles and achieved certain results.</p>
     <!-- 大标题 -->
     <h1>Fixed-Wing Long-Range Covert Flight </h1>
 
