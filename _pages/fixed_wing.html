@@ -65,16 +65,17 @@ redirect_from:
   Here, the aircraft is set to maintain a constant altitude of 60 meters, 
   with a flight speed of 150 meters per second. Mountainous terrains on the map exceeding 60 meters in height are treated as impassable obstacles.</p>
     
-   <h2>Hierarchical Multi-goal Path Finding</h2>
+   <h2>Sampling-Based Global Covert Rough Path Planning</h2>
   <div class="center">
-      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp1.PNG?raw=true" alt="">
+      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/96a2010660a9e880b3ac05d6ee48315dbfe4d0c5/_pages/rrt.png?raw=true" alt="">
   </div>
-    <p>This subsection addresses the challenge of finding an efficient path for the drone that not only reaches the target but also considers potential obstacles and occlusion issues.
-This is a hierarchical method that first identifies multiple goals or waypoints that the drone should reach to maintain visibility of the target. These goals are selected based on their distance to the target and potential occlusion.
-A greedy algorithm is employed to enhance the efficiency of the path-finding process. This algorithm ensures that the path is not only safe and visible but also computationally feasible for real-time applications.</p>
+    <p>In the application of this project, it is necessary to specially design the loss function. To ensure covert flight, 
+      the loss function needs to be specifically designed based on the level of concealment provided by the environment, making covert paths more likely to be selected and integrated into the optimal trajectory.
+      To achieve this effect, the project proposes to first conduct terrain estimation. During sampling, the terrain difference will be integrated along the trajectory between sampled state points to assess the level of concealment of the terrain. 
+      Here, the terrain difference will be defined as the elevation difference within a prescribed square area centered on the state points.</p>
 
 
-   <h2>Safe Flight Corridor Generation</h2>
+   <h2>Gradient-Based Efficient Trajectory Optimization</h2>
   <div class="center">
       <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp2.PNG?raw=true" alt="">
   </div>
@@ -83,7 +84,7 @@ Previous methods in safe flight corridor generation often faced limitations, esp
 I utilize a novel approach to generate a more flexible and safer corridor, which adapts to the environment and the drone's dynamic constraints, ensuring a higher level of safety during flight.</p>
 
 
-     <h2>Visible Region Generation</h2>
+     <h2>Simulation Verification</h2>
   <div class="center">
       <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp3.PNG?raw=true" alt="">
   </div>
