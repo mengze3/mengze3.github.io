@@ -84,19 +84,19 @@ redirect_from:
       This step involves estimating the coarse spatial distribution of the point. Next, leveraging the local correction layer, we further obtain the accurate position of the state point based on the environmental features and the probability distribution obtained earlier. Intuitively, 
       our aim is to first approximately determine the region proposal in which each state point resides and then regress its positional offset relative to the anchor, thereby recovering the global position of the point.</p>
      
-  <p>The input to our network consists of the environment E, the encoding of the start and goal states. Here, E is represented by a Euclidean Signed Distance Field (ESDF), 
-       where each element represents the signed distance from obstacles at that location. Inspired by the work, we adopt a start-goal encoding strategy by highlighting patches of size c ∗ c on a tensor of size H ∗ W. Specifically, 
-       we assign a value of -1 to the patch representing the start point and a value of 1 to the patch representing the goal point. The remaining positions in the tensor are set as 0. To fully represent the SE(2) space, 
-       we introduce two additional H ∗ W tensors to capture the cosine and sine values of the robot orientations at the start and goal locations. 
-       Specifically, one tensor represents the cosine values for the patches corresponding to the starting and target points, while the other tensor represents the sine values. Subsequently, 
-       the aforementioned representations of the environment and the start and goal SE(2) states are concatenated to form a 4∗H∗W
-      tensor, which serves as the input to the feature extraction layer of our model. The feature extraction layer consists of a Fully Convolutional Network (FCN) and a Transformer Encoder. 
-       The FCN encodes path plan problem into a high-dimensional latent space, and the size of this latent feature is downsampled to d ∗ Hl ∗ Wl to match the shape of the probability distribution of region proposals. 
-       Here, d represents the user-defined dimension of the latent features. Next, we apply the transformer module to further fuse the features within the latent space, without altering the shape of the feature tensor. 
-       For brevity, we denote the output of the feature extraction layer as M. M is further inputted to the global distribution layer, resulting in the probability distribution map P over the region proposals for N points along the path, 
-       with a size of N ∗Hl∗Wl. Here, we denote the probability of the i-th point belonging to the (j,k)-th region as ϱi,j,k. Moreover, it is evident that these probabilities should satisfy the principle of probability normalization:
-      Hl−1Xj=0Wl−1Xk=0 ϱi,j,k = 1,∀i ∈ {1,...,N}. (1)</p>
+  <p>1) Feature Extraction: In this component, the FCN consists of four dual-convolution layers. The first dual-convolution layer does not alter the width and height of the tensor, but only increases the number of channels. 
+    The subsequent three dual-convolution layers downsample the tensor in width and height, while doubling the number of channels after each layer. Moreover, MaxPool is employed for downsampling, 
+    and ReLU and Batch Normalization are nested between convolutions to enhance the generaliza-tion performance. Then, 
+    the output of the FCN is re-shaped row-wise into a size of d∗(HlWl) and undergoes positional encoding before being fed into the Transformer Encoder. 
+    The Transformer module further learns the relationships between these latent features through multi-headed self-attention and multilayer perceptron blocks.</p>
 
+  <p>2) Global Distribution: This module predicts the proba-bility distribution of N state points in the downsampled space, hence the output tensor dimension should be N ∗ Hl ∗ Wl. 
+    For this purpose, we efficiently implement this operation using two layers of 3∗3 padding convolutions.Additionally, we perform Softmax on each channel of the output tensor to ensure proper probability normalization.</p>
+
+  <p>3) Local Correction: Similar to the previous module, we employ two layers of 3∗3 padding convolutions to assign the orientation angle and position offsets relative to the anchor for each region. 
+    The output tensor has dimensions of 3N ∗ Hl ∗ Wl. Furthermore, 
+    we apply the Sigmoid activation function to limit the position offsets of the network output, ensuring that the corrected point remains in the vicinity of the anchor.</p>
+  
 
    <h2>B. Loss Function</h2>
     <p>This section discusses the generation of a safe flight corridor (SFC) that the drone can follow without colliding with obstacles.
