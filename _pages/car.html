@@ -70,6 +70,7 @@ redirect_from:
   which includes its position and orientation angle. We firstly describe the network architecture, which initially estimates the distribution of each state point in the environmental space, 
   and then further reduces their uncertainty to determine the precise states of the points in the sequence. Then, we discuss the loss function used during training, which includes supervising the network’s 
   output with the ground truth and penalizing infeasible paths based on safety considerations and nonholonomic dynamic constraints.</p>
+  
     
    <h2>A. Neural Network Architecture</h2>
     <div class="center">
@@ -80,6 +81,18 @@ redirect_from:
       corresponds to a block of size H Hl ∗ W Wl in the environment. The center point of each region proposal is designated as an anchor point. Subsequently, we employ the global distribution layer to obtain the probability distribution of each state point with respect to the region proposals. 
       This step involves estimating the coarse spatial distribution of the point. Next, leveraging the local correction layer, we further obtain the accurate position of the state point based on the environmental features and the probability distribution obtained earlier. Intuitively, 
       our aim is to first approximately determine the region proposal in which each state point resides and then regress its positional offset relative to the anchor, thereby recovering the global position of the point.</p>
+     <p>The input to our network consists of the environment E, the encoding of the start and goal states. Here, E is represented by a Euclidean Signed Distance Field (ESDF), 
+       where each element represents the signed distance from obstacles at that location. Inspired by the work, we adopt a start-goal encoding strategy by highlighting patches of size c ∗ c on a tensor of size H ∗ W. Specifically, 
+       we assign a value of -1 to the patch representing the start point and a value of 1 to the patch representing the goal point. The remaining positions in the tensor are set as 0. To fully represent the SE(2) space, 
+       we introduce two additional H ∗ W tensors to capture the cosine and sine values of the robot orientations at the start and goal locations. 
+       Specifically, one tensor represents the cosine values for the patches corresponding to the starting and target points, while the other tensor represents the sine values. Subsequently, 
+       the aforementioned representations of the environment and the start and goal SE(2) states are concatenated to form a 4∗H∗W
+      tensor, which serves as the input to the feature extraction layer of our model. The feature extraction layer consists of a Fully Convolutional Network (FCN) and a Transformer Encoder. 
+       The FCN encodes path plan problem into a high-dimensional latent space, and the size of this latent feature is downsampled to d ∗ Hl ∗ Wl to match the shape of the probability distribution of region proposals. 
+       Here, d represents the user-defined dimension of the latent features. Next, we apply the transformer module to further fuse the features within the latent space, without altering the shape of the feature tensor. 
+       For brevity, we denote the output of the feature extraction layer as M. M is further inputted to the global distribution layer, resulting in the probability distribution map P over the region proposals for N points along the path, 
+       with a size of N ∗Hl∗Wl. Here, we denote the probability of the i-th point belonging to the (j,k)-th region as ϱi,j,k. Moreover, it is evident that these probabilities should satisfy the principle of probability normalization:
+      Hl−1Xj=0Wl−1Xk=0 ϱi,j,k = 1,∀i ∈ {1,...,N}. (1)</p>
 
 
    <h2>B. Loss Function</h2>
