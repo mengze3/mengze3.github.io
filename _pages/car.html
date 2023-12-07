@@ -4,7 +4,7 @@ title: "Transformer
 -
 based Trajectory Planning for Robots: Extending to UAVs and UGVs"
 permalink: /car/
-author_profile: true
+author_profile: false
 redirect_from:
   - /resume
 ---
@@ -12,6 +12,9 @@ redirect_from:
 {% include base_path %}
 
 <head>
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
     <style>
         .container {
             display: flex; /* Use Flexbox for layout */
@@ -59,9 +62,14 @@ redirect_from:
       and comparative experiments are undertaken to validate the superiority of our algorithm.</p>
   
     <!-- 大标题 -->
-    <h1>Target tracking and control</h1>
+    <h1>LEARNING-BASED PATH PLANNING</h1>
 
-<iframe width="840" height="500" src="//player.bilibili.com/player.html?aid=366865413&bvid=BV1f94y1j78r&cid=1354193017&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+  <p>In this section, we introduce the learning-based path planner that leverages the performance of the network to directly output an initial path for optimization without the need for
+  additional sampling or searching. Our path planner takes asinput the navigation start xpi and goal xpN, as well as the grid-based environment E of size H∗W, and directly outputs a path p = {xp1,...,xpi ,...,xpN} 
+  serialized as a sequence of multiple state points. Here, the resolution of each grid is defined as rs. Moreover, each state point in the path is associated with the SE(2) state of the robot, 
+  which includes its position and orientation angle. We firstly describe the network architecture, which initially estimates the distribution of each state point in the environmental space, 
+  and then further reduces their uncertainty to determine the precise states of the points in the sequence. Then, we discuss the loss function used during training, which includes supervising the network’s 
+  output with the ground truth and penalizing infeasible paths based on safety considerations and nonholonomic dynamic constraints.</p>
     
    <h2>Hierarchical Multi-goal Path Finding</h2>
   <div class="center">
