@@ -65,7 +65,7 @@ redirect_from:
     <h1>LEARNING-BASED PATH PLANNING</h1>
 
   <p>In this section, we introduce the learning-based path planner that leverages the performance of the network to directly output an initial path for optimization without the need for
-  additional sampling or searching. Our path planner takes asinput the navigation start x^p_i and goal x^p_N, as well as the grid-based environment E of size H∗W, and directly outputs a path p = {xp1,...,xpi ,...,xpN} 
+  additional sampling or searching. Our path planner takes asinput the navigation start x^{p}_{i} and goal x^p_N, as well as the grid-based environment E of size H∗W, and directly outputs a path p = {xp1,...,xpi ,...,xpN} 
   serialized as a sequence of multiple state points. Here, the resolution of each grid is defined as rs. Moreover, each state point in the path is associated with the SE(2) state of the robot, 
   which includes its position and orientation angle. We firstly describe the network architecture, which initially estimates the distribution of each state point in the environmental space, 
   and then further reduces their uncertainty to determine the precise states of the points in the sequence. Then, we discuss the loss function used during training, which includes supervising the network’s 
