@@ -122,49 +122,24 @@ redirect_from:
           <p>Obstacle Avoidance Loss. We design the loss function to emphasize the collision-free property of paths to the network</p>
 
 
-    <h1>Target recognition and localization</h1>
+    <h1>GRADIENT-BASED TRAJECTORY OPTIMIZATION</h1>
   
-    <img src="https://github.com/mengze3/mengze3.github.io/blob/85ed4283c001b95214b7627a670d0f036b9bd630/_pages/old_detect.png?raw=true" alt="original detection">
-    <p>  A formidable obstacle surfaced: the low accuracy of image recognition, attributed to inadequate data stemming from the diverse scenes encountered during UAV flights.</p>
+    <p>In this section, we conduct spatial-temporal optimization on the rough path obtained in the previous section, taking into account a higher-dimensional and more accurate dynamic model, 
+      while ensuring collision-free property. Firstly, we intro-duce the differential flatness model for car-like robots, which serves as a cornerstone for subsequent optimization modeling. Next, 
+      we present the trajectory optimization formulation in the flat space. In comparison to our previous work [13], one significant distinction lies in the design of a dual-layer polynomial-based trajectory parameterization. 
+      This approach inherits the efficient characteristics of the prior work while fundamentally addressing the singularity issues inherent in the flat model. 
+      Finally, we discribe the gradient backpropagation computation process and practical solution details specific to this optimization formulation.</p>
+  
+    <h2>A. Differential Flatness-Based Vehicle Model</h2>
+    <p></p>
 
-      <div class="center">
-        <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/4b73183ed170615e62c442be03e2334af1856149/_pages/flur1.jpg?raw=true" alt="">
-    </div>
-    <p>    To tackle this challenge, we implemented innovative measures to augment our dataset. Recording videos enabled us to capture dynamic UAV images in flight, 
-      expanding the range of perspectives and scenarios for more diverse training data. Additionally, we incorporated a jitter to simulate visual instability encountered in actual
-      flights, enhancing the realism of our training data.</p>
+      <h2>B. Dual-Layer Polynomial-Based Optimization Formulation</h2>
+    <p></p>
 
-    <img src="https://github.com/mengze3/mengze3.github.io/blob/629a88ce29542fd2cee39b2c2a2153936f48cf86/_pages/new_detect.png?raw=true" alt="improved detection">
-    <table border="1">
-    <tr>
-      <th style="text-align: center;"></th>
-      <th style="text-align: center;">original detection</th>
-      <th style="text-align: center;">improved detection</th>
-    </tr>
-    <tr>
-      <td style="text-align: center;">Precision(%)</td>
-      <td style="text-align: center;">63</td>
-      <td style="text-align: center;">98</td>
-    </tr>
-    <tr>
-      <td style="text-align: center;">Recall(%)</td>
-     <td style="text-align: center;">36</td>
-      <td style="text-align: center;">97</td>
-    </tr>
-  </table>
-    <p>    Through persistent efforts and optimization, our image recognition accuracy experienced a substantial boost, with recall rates increasing from 36% to 97% and precision surging from 68% to 98%.
-      This remarkable improvement has significantly bolstered the robustness of our robot tracking. Particularly noteworthy is that when the confidence (threshold) is set at 0.5, 
-      the system demonstrates exceptionally high reliability and efficiency.</p>
+        <h2>C. Gradient Back Propagation</h2>
+    <p></p>
 
-
-    <img src="https://github.com/mengze3/mengze3.github.io/blob/2a12037a0b6628c7cc9cf14e5cf4312e5e556653/_pages/yolo.png?raw=true" alt="improved detection">
-    <p>The left side of the image shows examples of objects identified by the trained model, while the right side displays charts of various training metrics. 
-      These charts include changes in the loss function, as well as variations in evaluation metrics such as precision, recall, and mean Average Precision (mAP).</p>
-    <p>Loss Function: The train/box_loss, train/obj_loss, train/cls_loss, and corresponding validation set losses val/box_loss, val/obj_loss, 
-      val/cls_loss all show a gradual decrease with increasing training epochs, indicating that the model is progressively improving, learning to better identify and classify objects.</p>
-    <p>Precision and Recall: The metrics/precision and metrics/recall charts show that both these metrics are high, close to 1.0, 
-      indicating that the model can correctly identify most true positives and rarely misclassifies negatives as positives.</p>
-    <p>Mean Average Precision (mAP): The metrics/mAP_0.5 and metrics/mAP_0.5:0.95 represent the mAP at IoU (Intersection over Union) thresholds of 0.5 and between 0.5 to 0.95, respectively. 
-      Both of these metrics also exhibit high values, especially the metrics/mAP_0.5 is near perfect, signifying that the model performs well across different IoU thresholds</p>
+      <h1>EVALUATIONS</h1>
+    
   
 </body>
