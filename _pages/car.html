@@ -99,9 +99,14 @@ redirect_from:
   
 
    <h2>B. Loss Function</h2>
-    <p>This section discusses the generation of a safe flight corridor (SFC) that the drone can follow without colliding with obstacles.
-Previous methods in safe flight corridor generation often faced limitations, especially in complex environments where the drone must maneuver through tight spaces or avoid moving obstacles.
-I utilize a novel approach to generate a more flexible and safer corridor, which adapts to the environment and the drone's dynamic constraints, ensuring a higher level of safety during flight.</p>
+  
+    <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point. 
+      We apply the cross-entropy loss to measure the discrepancy between the predicted region hypotheses and the ground truth</p>
+
+      <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point. 
+      We apply the cross-entropy loss to measure the discrepancy between the predicted region hypotheses and the ground truth</p>
+
+       <p>Path Supervision Loss. We employ the Mean Square Error (MSE) loss to supervise the SE(2) state for each point along the path</p>
 
 
     <h1>Target recognition and localization</h1>
