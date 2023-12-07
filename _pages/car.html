@@ -100,13 +100,31 @@ redirect_from:
 
    <h2>B. Loss Function</h2>
   
-    <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point. 
+      <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point. 
       We apply the cross-entropy loss to measure the discrepancy between the predicted region hypotheses and the ground truth</p>
 
       <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point. 
       We apply the cross-entropy loss to measure the discrepancy between the predicted region hypotheses and the ground truth</p>
 
        <p>Path Supervision Loss. We employ the Mean Square Error (MSE) loss to supervise the SE(2) state for each point along the path</p>
+
+       <p>Smoothness Loss. In this part, we characterize smoothness by considering the path length and the total change in angle. Moreover, when N is sufficiently large, 
+         the difference between adjacent state points is small. Hence, to mitigate periodicity, 
+         we reasonably substitute the difference between the sines and cosines of angles for the angle difference.</p>
+
+         <p>Smoothness Loss. In this part, we characterize smoothness by considering the path length and the total change in angle. Moreover, when N is sufficiently large, 
+         the difference between adjacent state points is small. Hence, to mitigate periodicity, 
+         we reasonably substitute the difference between the sines and cosines of angles for the angle difference.</p>
+
+         <p>Nonholonomic Dynamic Loss. We design the loss function to emphasize the alignment between the direction of the line connecting adjacent points and the orientation angle direction</p>
+
+         <p>Curvature Constraint Loss. We define the loss function to penalize exceeding the specified curvature thresh-old κmax</p>
+
+          <p>Uniform Loss. In the spatial domain, our objective is to at-tain a highly uniform distribution of points, which is achieved by penalizing variance. Moreover, 
+          we further normalize this variance by the path length of the ground truth, thereby ensuring that the network does not excessively prioritize long-distance path planning problems.</p>
+
+            <p>Uniform Loss. In the spatial domain, our objective is to at-tain a highly uniform distribution of points, which is achieved by penalizing variance. Moreover, 
+          we further normalize this variance by the path length of the ground truth, thereby ensuring that the network does not excessively prioritize long-distance path planning problems.</p>
 
 
     <h1>Target recognition and localization</h1>
