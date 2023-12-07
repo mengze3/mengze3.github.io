@@ -20,7 +20,7 @@ Vision-Based Object Tracking for UAV in National-level Student Research Training
 
 Transformer-based Trajectory Planning for Robots: Extending to UAVs and UGVs
 ======
-* June 2023 - Nov 2023: Research Assistant([report](https://mengze3.github.io/car/))
+* June 2023 - Nov 2023: Research Assistant([manuscript](https://mengze3.github.io/files/main.pdf))
   * Duties included:
     * Optimization of the network structure
     * Benchmark
