@@ -112,10 +112,6 @@ redirect_from:
          the difference between adjacent state points is small. Hence, to mitigate periodicity, 
          we reasonably substitute the difference between the sines and cosines of angles for the angle difference.</p>
 
-         <p>Smoothness Loss. In this part, we characterize smoothness by considering the path length and the total change in angle. Moreover, when N is sufficiently large, 
-         the difference between adjacent state points is small. Hence, to mitigate periodicity, 
-         we reasonably substitute the difference between the sines and cosines of angles for the angle difference.</p>
-
          <p>Nonholonomic Dynamic Loss. We design the loss function to emphasize the alignment between the direction of the line connecting adjacent points and the orientation angle direction</p>
 
          <p>Curvature Constraint Loss. We define the loss function to penalize exceeding the specified curvature thresh-old κmax</p>
@@ -123,8 +119,7 @@ redirect_from:
           <p>Uniform Loss. In the spatial domain, our objective is to at-tain a highly uniform distribution of points, which is achieved by penalizing variance. Moreover, 
           we further normalize this variance by the path length of the ground truth, thereby ensuring that the network does not excessively prioritize long-distance path planning problems.</p>
 
-            <p>Uniform Loss. In the spatial domain, our objective is to at-tain a highly uniform distribution of points, which is achieved by penalizing variance. Moreover, 
-          we further normalize this variance by the path length of the ground truth, thereby ensuring that the network does not excessively prioritize long-distance path planning problems.</p>
+          <p>Obstacle Avoidance Loss. We design the loss function to emphasize the collision-free property of paths to the network</p>
 
 
     <h1>Target recognition and localization</h1>
