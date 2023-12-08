@@ -64,10 +64,10 @@ redirect_from:
     <!-- 大标题 -->
     <h1>LEARNING-BASED PATH PLANNING</h1>
 
-  <p>User
+  <p>
 In this section, we introduce the learning-based path planner that leverages the performance of the network to directly output an initial path for optimization without the need for additional sampling or searching. 
       Our path planner takes as input the navigation start ${x}^p_i$ and goal ${x}^p_N$, 
-      as well as the grid-based environment $\mathcal{E}$ of size $H*W$, and directly outputs a path $\bm{\mathrm{p}} =
+      as well as the grid-based environment $\mathcal{E}$ of size $H*W$, and directly outputs a path $ {\mathrm{p}} =
     \{ {x}^p_1,...,{x}^p_i,...,{x}^p_N\} $ serialized as a sequence of multiple state points.
     Here, the resolution of each grid is defined as $r_s$. Moreover, each state point  in the path is associated with the $\mathbb{SE}(2)$ state of the robot, which includes its position and orientation angle.
     We firstly describe the network architecture, which initially estimates the distribution of each state point in the environmental space, 
@@ -81,7 +81,7 @@ In this section, we introduce the learning-based path planner that leverages the
       <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
   </div>
    
-  <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer, as illustrated in figure.
+  <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer, as illustrated in the figure.
 In practice, directly localizing the position of a specific state point within the environment is challenging and labor-intensive. Therefore, drawing inspiration from the R-CNN, our network follows a two-stage inference architecture.
 Initially, we uniformly partition $\mathcal{E}$ into $H_l * W_l$ region proposals, where each region proposal corresponds to a block of size $\frac{H}{H_l} * \frac{W}{W_l}$ in the environment. 
     The center point of each region proposal is designated as an anchor point.Subsequently, we employ the global distribution layer to obtain the probability distribution of each state point with respect to the region proposals. 
@@ -175,13 +175,49 @@ Intuitively, our aim is to first approximately determine the region proposal in 
   
     <p>In this section, we conduct spatial-temporal optimization on the rough path obtained in the previous section, taking into account a higher-dimensional and more accurate dynamic model, 
       while ensuring collision-free property. Firstly, we intro-duce the differential flatness model for car-like robots, which serves as a cornerstone for subsequent optimization modeling. Next, 
-      we present the trajectory optimization formulation in the flat space. In comparison to our previous work [13], one significant distinction lies in the design of a dual-layer polynomial-based trajectory parameterization. 
+      we present the trajectory optimization formulation in the flat space. In comparison to our previous work, one significant distinction lies in the design of a dual-layer polynomial-based trajectory parameterization. 
       This approach inherits the efficient characteristics of the prior work while fundamentally addressing the singularity issues inherent in the flat model. 
       Finally, we discribe the gradient backpropagation computation process and practical solution details specific to this optimization formulation.</p>
   
     <h2>A. Differential Flatness-Based Vehicle Model</h2>
-    <p>We employ the simplified kinematic bicycle model to depict a four-wheel vehicle. Under the assumption of front-wheel drive and flawless rolling with no slippage, 
-      the motion model is represented as illustrated in Fig.2. Here, we consider a more</p>
+    <p>We employ the simplified kinematic bicycle model to depict a four-wheel vehicle. Under the assumption of front-wheel drive and flawless rolling with no slippage, the motion model is represented as illustrated in Fig.\ref{fig:difmodel}. 
+	Here, we consider a more detailed and accurate dynamic model: $\left(p_x, p_y, \theta, v, a, \phi, \omega\right)^{\rm T}$,
+	\begin{align}
+	&\frac{d}{dt} \begin{bmatrix}
+	p_x\\
+	p_y\\
+	\theta\\
+	v\\
+	\phi
+	\end{bmatrix}= 
+	\begin{bmatrix}
+	v\cos\theta\\
+	v\sin\theta\\
+	v\tan\phi/L\\
+	a\\
+	\omega
+	\end{bmatrix},
+	\end{align}
+	where $ \bm{p} = \left(p_x, p_y\right)^{\rm T}$ denotes the position at the center of the rear wheels, $v$ is the longitudinal velocity w.r.t vehicle's body frame, 
+	$a$ represents the longitude acceleration, $\phi$ is the steering angle of the front wheels,  $\omega$ is the steer angular velocity, and $L$ is the wheelbase. 
+	Subsequently, we select the flat output $\bm{\sigma} := \left(\sigma_x, \sigma_y\right)^{\rm T}$, where $\bm{\sigma} = \bm{p}$ represents the position, notably centered on the rear wheel of the vehicle.
+	For computational convenience, we  introduce an auxiliary antisymmetric matrix $ \bm{{\rm B}} := \begin{bmatrix}
+	0 & -1\\1 & 0\end{bmatrix} $ and the transformation of the remaining motion variables can be described as follows:
+	\begin{subequations}
+		\begin{align}
+		v     & =  \eta ||\dot{\bm{\sigma}}_{|t}||_2,  
+		\theta    =   \arctan2(\eta\dot{\sigma}_{y|t}, \eta\dot{\sigma}_{x|t}), \label{eq:v0}\\
+		a  & =  \eta\frac{\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\dot{\bm{\sigma}}_{|t}}{||\dot{\bm{\sigma}}_{|t}||_2}\\
+		\phi   & =   \arctan\left(\eta\frac{\ddot{\bm{\sigma}}_{|t}^\mathrm{T} \bm{{\rm B}} \dot{\bm{\sigma}}_{|t}L   }{ {||\dot{\bm{\sigma}}_{|t}||}_2^3}\right),\label{eq:phi0}\\
+		\omega &= \eta L \frac{  \dddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}
+		||\dot{\bm{\sigma}}_{|t}||_2^3-3\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\dot{\bm{\sigma}}_{|t}||\dot{\bm{\sigma}}_{|t}||_2}{||\dot{\bm{\sigma}}_{|t}||_2^6+
+	(\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}L)^2}.\label{eq:omega0}
+		\end{align}
+	\end{subequations}
+	$\dot{\bm{\sigma}}_{|t}, \ddot{\bm{\sigma}}_{|t}$ and $ \dddot{\bm{\sigma}}_{|t}$
+	are the  first, second, and third derivatives of the flat output w.r.t time, respectively.
+	$\eta \in \{-1, 1\}$ is an additional variable fixed in optimization to characterize the motion direction of the vehicle, where $\eta = -1$ and $\eta = 1 $ represent the backward and forward movements, respectively.
+	Hence, leveraging the inherent differential flatness property, we can employ the flat outputs and their finite derivatives to represent various state variables of the robot, thereby streamlining trajectory planning and enhancing optimization processes.</p>
 
       <h2>B. Dual-Layer Polynomial-Based Optimization Formulation</h2>
     <p></p>
