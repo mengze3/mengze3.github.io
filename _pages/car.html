@@ -200,18 +200,18 @@ Intuitively, our aim is to first approximately determine the region proposal in 
 	\end{align}
 	where $ {p} = \left(p_x, p_y\right)^{\rm T}$ denotes the position at the center of the rear wheels, $v$ is the longitudinal velocity w.r.t vehicle's body frame, 
 	$a$ represents the longitude acceleration, $\phi$ is the steering angle of the front wheels,  $\omega$ is the steer angular velocity, and $L$ is the wheelbase. 
-	Subsequently, we select the flat output $ {\sigma} := \left(\sigma_x, \sigma_y\right)^{\rm T}$, where $ {\sigma} = \bm{p}$ represents the position, notably centered on the rear wheel of the vehicle.
+	Subsequently, we select the flat output $ {\sigma} := \left(\sigma_x, \sigma_y\right)^{\rm T}$, where $ {\sigma} =  {p}$ represents the position, notably centered on the rear wheel of the vehicle.
 	For computational convenience, we  introduce an auxiliary antisymmetric matrix $ {{\rm B}} := \begin{bmatrix}
 	0 & -1\\1 & 0\end{bmatrix} $ and the transformation of the remaining motion variables can be described as follows:
 	\begin{subequations}
 		\begin{align}
-		v     & =  \eta ||\dot{ {\sigma}}_{|t}||_2,  
+		v     & =  \eta ||\dot{\bm{\sigma}}_{|t}||_2,  
 		\theta    =   \arctan2(\eta\dot{\sigma}_{y|t}, \eta\dot{\sigma}_{x|t}), \label{eq:v0}\\
-		a  & =  \eta\frac{\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\dot{ {\sigma}}_{|t}}{||\dot{ {\sigma}}_{|t}||_2}\\
-		\phi   & =   \arctan\left(\eta\frac{\ddot{ {\sigma}}_{|t}^\mathrm{T} \bm{{\rm B}} \dot{ {\sigma}}_{|t}L   }{ {||\dot{ {\sigma}}_{|t}||}_2^3}\right),\label{eq:phi0}\\
-		\omega &= \eta L \frac{  \dddot{ {\sigma}}_{|t}^\mathrm{T} {{\rm B}}\dot{ {\sigma}}_{|t}
-		||\dot{ {\sigma}}_{|t}||_2^3-3\ddot{ {\sigma}}_{|t}^\mathrm{T} {{\rm B}}\dot{ {\sigma}}_{|t}\ddot{ {\sigma}}_{|t}^\mathrm{T}\dot{ {\sigma}}_{|t}||\dot{ {\sigma}}_{|t}||_2}{||\dot{ {\sigma}}_{|t}||_2^6+
-	(\ddot{ {\sigma}}_{|t}^\mathrm{T} {{\rm B}}\dot{ {\sigma}}_{|t}L)^2}.\label{eq:omega0}
+		a  & =  \eta\frac{\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\dot{\bm{\sigma}}_{|t}}{||\dot{\bm{\sigma}}_{|t}||_2}\\
+		\phi   & =   \arctan\left(\eta\frac{\ddot{\bm{\sigma}}_{|t}^\mathrm{T} \bm{{\rm B}} \dot{\bm{\sigma}}_{|t}L   }{ {||\dot{\bm{\sigma}}_{|t}||}_2^3}\right),\label{eq:phi0}\\
+		\omega &= \eta L \frac{  \dddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}
+		||\dot{\bm{\sigma}}_{|t}||_2^3-3\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\dot{\bm{\sigma}}_{|t}||\dot{\bm{\sigma}}_{|t}||_2}{||\dot{\bm{\sigma}}_{|t}||_2^6+
+	(\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}L)^2}.\label{eq:omega0}
 		\end{align}
 	\end{subequations}
 	$\dot{ {\sigma}}_{|t}, \ddot{ {\sigma}}_{|t}$ and $ \dddot{ {\sigma}}_{|t}$
