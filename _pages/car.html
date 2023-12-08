@@ -255,6 +255,30 @@ Intuitively, our aim is to first approximately determine the region proposal in 
 	\dddot{s}_{|t}\dot{ {\gamma}}_{|s} + 3\dot{s}_{|t}\ddot{ {\gamma}}_{|s}\ddot{s}_{|t}+\dot{s}_{|t}^3\dddot{ {\gamma}}_{|s},\label{eq:ddsigma}
 	\end{align}</p>
 
+	<p>$\dot{\bm{\gamma}}_{|s}, \ddot{\bm{\gamma}}_{|s}$ and $ \dddot{\bm{\gamma}}_{|s}$
+	are the  first, second, and third derivatives of the flat output w.r.t \textit{Pseudo Arc}, respectively.
+	It is worth mentioning that $\dot{\bm{\sigma}}_{|t}$ represents the actual motion velocity of the robot, while $\dot{\bm{\gamma}}_{|s}$ is defined as the \textit{Pseudo Velocity}.
+	Moreover, the physical meaning of $\dot{s}_{|t}\geq0$ is the magnitude of velocity along the \textit{Pseudo Arc}.
+	We substitute Eq. (\ref{eq:sigma}-\ref{eq:ddsigma}) into Eq. (\ref{eq:v0}-\ref{eq:omega0}), thus modifying the differential flatness model as follows:
+
+		\begin{align}
+		v(t)     & =  \eta ||\dot{ {\gamma}}_{|s}||_2 \dot{s}_{|t},  
+		\theta    =   \arctan2(\eta\dot{\gamma}_{y|s}, \eta\dot{\gamma}_{x|s}), \label{eq:v1}
+
+		\begin{align}
+		a(t)  & =  \eta(\ddot{s}_{|t}||\dot{ {\gamma}}_{|s}||_2+	\frac{\dot{s}_{|t}^2\ddot{ {\gamma}}_{|s}^\mathrm{T}\dot{ {\gamma}}_{|s}}{||\dot{ {\gamma}}_{|s}||_2}),\label{eq:at1}
+		\end{align}
+
+		\begin{align}
+		\phi(t)   & =   \arctan\left(\eta\frac{\ddot{ {\gamma}}_{|s}^\mathrm{T}  {{\rm B}} \dot{ {\gamma}}_{|s}L   }{ {||\dot{ {\gamma}}_{|s}||}_2^3}\right),
+		\end{align}
+
+		\begin{align}
+		\omega(t) &= \eta L \frac{  \dddot{ {\gamma}}_{|s}^\mathrm{T}\bm{{\rm B}}\dot{ {\gamma}}_{|s}
+			||\dot{ {\gamma}}_{|s}||_2^3-3\ddot{ {\gamma}}_{|s}^\mathrm{T} {{\rm B}}\dot{ {\gamma}}_{|s}\ddot{ {\gamma}}_{|s}^\mathrm{T}\dot{ {\gamma}}_{|s}||\dot{ {\gamma}}_{|s}||_2}{||\dot{ {\gamma}}_{|s}||_2^6+
+			(\ddot{ {\gamma}}_{|s}^\mathrm{T} {{\rm B}}\dot{ {\gamma}}_{|s}L)^2}\dot{s}_{|t}.\label{eq:omega1}
+		\end{align}</p>
+
 
         <h2>C. Gradient Back Propagation</h2>
     <p></p>
