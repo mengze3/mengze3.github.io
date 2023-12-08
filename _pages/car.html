@@ -230,7 +230,31 @@ Intuitively, our aim is to first approximately determine the region proposal in 
 	Hence, leveraging the inherent differential flatness property, we can employ the flat outputs and their finite derivatives to represent various state variables of the robot, thereby streamlining trajectory planning and enhancing optimization processes.</p>
 
       <h2>B. Dual-Layer Polynomial-Based Optimization Formulation</h2>
-    <p></p>
+    <p>In our previous work~\cite{zhichaohan}, we parametrized the flat output $\bm{\sigma}$ directly as a piecewise polynomial function of time. 
+	    While this method is efficient and straightforward, Eq. (\ref{eq:phi0}) and Eq. (\ref{eq:omega0}) face singularities when the robot's velocity $\dot{\bm{\sigma}}_{|t}$ is zero. 
+	    This led to numerical instability in the optimization process, making it difficult to guarantee strict satisfaction of constraints. By contrast, 
+	    in this paper, we intuitively introduce a \textit{Pseudo Arc} parametrized in the same piece-wise polynomial fashion.
+	By indirectly deriving the state variables using the flat model, this approach fundamentally eradicates the singularity issues:
+	\begin{align}
+	\bm{\sigma} =\bm{\gamma}(s),s = s(t). 
+	\end{align}
+	Here, $s\in\mathbb{R}^+$ is the \textit{Pseudo Arc} and
+	we refer to this indirect trajectory representation method as the Dual-Layer Polynomial-Based parametrization. 
+	Then the finite-dimensional derivative of the flat output can also be derived as follows:
+
+	\begin{align}
+	\dot{\bm{\sigma}}_{|t}	& =  \dot{\bm{\gamma}}_{|s} \dot{s}_{|t},\label{eq:sigma}
+    	\end{align}	
+	    
+    	\begin{align}
+	\ddot{\bm{\sigma}}_{|t}	& =  \dot{\bm{\gamma}}_{|s} \ddot{s}_{|t} + \dot{s}_{|t}^2\ddot{\bm{\gamma}}_{|s},\label{eq:dsigma}
+    	\end{align}	
+
+	 \begin{align}   
+	\dddot{\bm{\sigma}}_{|t}	&=
+	\dddot{s}_{|t}\dot{\bm{\gamma}}_{|s} + 3\dot{s}_{|t}\ddot{\bm{\gamma}}_{|s}\ddot{s}_{|t}+\dot{s}_{|t}^3\dddot{\bm{\gamma}}_{|s},\label{eq:ddsigma}
+	\end{align}</p>
+
 
         <h2>C. Gradient Back Propagation</h2>
     <p></p>
