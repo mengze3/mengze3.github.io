@@ -103,26 +103,71 @@ Intuitively, our aim is to first approximately determine the region proposal in 
 
    <h2>B. Loss Function</h2>
   
-      <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point. 
-      We apply the cross-entropy loss to measure the discrepancy between the predicted region hypotheses and the ground truth</p>
+      <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point.
+	We apply the cross-entropy loss  to measure the discrepancy between the predicted region hypotheses and the ground truth:
+	\begin{align}
+		\mathcal{L}_{ce} = - w_{ce}\sum_{i=1}^{N}\sum_{j=0}^{H_l-1} \sum_{k=0}^{W_l-1}\overline\varrho_{i,j,k} \log(\varrho_{i,j,k}).
+	\end{align}
+	where $\overline\varrho_{i,j,k}$ represents the probability ground truth.</p>
+	
+	       <p>Path Supervision Loss. We employ the Mean Square Error (MSE)  loss to supervise the $\mathbb{SE}$(2) state for each point along the path:
+	\begin{align}
+	&	\mathcal{L}_{mse} = w_{p}\frac{ \sum_{i=1}^{N} (r^p_{x,i}-\overline r^p_{x,i})^2+(r^p_{y,i}-\overline r^p_{y,i})^2}{2N} \nonumber\\
+		&+w_{\theta}\frac{ \sum_{i=1}^{N} (\cos\theta^p_{i}-\cos\overline\theta^p_{i})^2+(\sin\theta^p_{i} -\sin\overline\theta^p_{i})^2}{2N},
+	\end{align}
+	where $(\overline r^p_{x,i}, \overline r^p_{y,i},\overline \theta^p_{i})$ is the $\mathbb{SE}$(2) state of the ground truth.
+	Furthermore, to address potential periodicity issues with angles, we supervise the sine and cosine values of the angles instead of the angles themselves.</p>
 
-      <p>Anchor Point Classification Loss. We model the role of the global distribution layer as a multi-classification problem, where our objective is to maximize the probability of the region containing the ground truth point. 
-      We apply the cross-entropy loss to measure the discrepancy between the predicted region hypotheses and the ground truth</p>
+       <p>Smoothness Loss. In this part, we characterize smoothness by considering the path length and the total change in angle. Moreover, when $N$ is sufficiently large, the difference between adjacent state points is small. Hence, to mitigate periodicity, we reasonably substitute the difference between the sines and cosines of angles for the angle difference. To emphasize the refinement of suboptimal cases where the planned path lacks smoothness compared to the ground truth, we design the following loss function to penalize such deviations:
+	\begin{align}
+	&\mathcal{L}_{smo} = w_{arc} (\mathrm{ReLU}(\frac{\sum_{i=1}^{N-1} 
+	\Delta^p_{r,i}
+	}{\sum_{i=1}^{N-1} 
+	\overline\Delta^p_{r,i}}-1))^2\nonumber\\
+	 &\ \ \ \ \ \ +w_{rsm} (\mathrm{ReLU}(\frac{\sum_{i=1}^{N-1} 
+	 \Delta^p_{\theta,i}
+	 }{\sum_{i=1}^{N-1} 
+	 	 \overline\Delta^p_{\theta,i}}-1))^2,
+	 \\
+	&\Delta^p_{x,i} = r^p_{x,i}-r^p_{x,i+1},\Delta^p_{y,i} = r^p_{y,i}-r^p_{y,i+1},\nonumber\\
+	&\Delta^p_{c,i} = \cos\theta^p_{i}-\cos\theta^p_{i+1},\Delta^p_{s,i} = \sin\theta^p_{i}-\sin\theta^p_{i+1},\nonumber\\
+	&\Delta^p_{r,i} = \sqrt{(\Delta^p_{x,i})^2+(\Delta^p_{y,i})^2},
+	\Delta^p_{\theta,i} = \sqrt{(\Delta^p_{c,i})^2+(\Delta^p_{s,i})^2}\nonumber,
+	\end{align}
+	where $\Delta^p_{*,i}$ and $\overline \Delta^p_{*,i}$ denote the $\mathbb{SE}$(2) state differences between adjacent points on the planned path and the ground truth, respectively.</p>
 
-       <p>Path Supervision Loss. We employ the Mean Square Error (MSE) loss to supervise the SE(2) state for each point along the path</p>
+         <p>Nonholonomic Dynamic Loss. We design the following loss function to emphasize the alignment between the direction of the line connecting adjacent points and the orientation angle direction:
+	\begin{align}
+	&\mathcal{L}_{hol} = \frac{w_{hol}}{N-1} \sum_{i=1}^{N-1}
+	\mathrm{ReLU}(
+	([\Delta^p_{x,i},\Delta^p_{y,i}]
+	\begin{bmatrix}
+	-\sin\theta^p_{i+1} \\
+	\cos\theta^p_{i+1}
+	\end{bmatrix})^2-\delta_h),
+	\end{align}where $\delta_h$ is the user-defined tolerance threshold.</p>
 
-       <p>Smoothness Loss. In this part, we characterize smoothness by considering the path length and the total change in angle. Moreover, when N is sufficiently large, 
-         the difference between adjacent state points is small. Hence, to mitigate periodicity, 
-         we reasonably substitute the difference between the sines and cosines of angles for the angle difference.</p>
+         <p>Curvature Constraint Loss. We define the following loss function to penalize exceeding the specified curvature threshold $\kappa_{max}$:
+	\begin{align}
+	&\mathcal{L}_{cur} = \frac{w_{cur}}{N-1} \sum_{i=1}^{N-1}
+	(\mathrm{ReLU}(
+	\Delta^p_{\theta,i}-\kappa_{max}*\Delta^p_{r,i}
+	))^2,
+	\end{align}</p>
 
-         <p>Nonholonomic Dynamic Loss. We design the loss function to emphasize the alignment between the direction of the line connecting adjacent points and the orientation angle direction</p>
+          <p>Uniform Loss. In the spatial domain, our objective is to attain a highly uniform distribution of points, which is achieved by penalizing variance. Moreover, we further normalize this variance by the path length of the ground truth, thereby ensuring that the network does not excessively prioritize long-distance path planning problems.
+	\begin{align}
+	&\mathcal{L}_{uni} = \frac{w_{uni}}{(N-1)\sum_{i=1}^{N-1}\overline\Delta^p_{r,i}} \sum_{i=1}^{N-1}(
+	\Delta^p_{r,i}-\frac{\sum_{j=1}^{N-1}\Delta^p_{r,j}}{N-1})^2,
+	\end{align}</p>
 
-         <p>Curvature Constraint Loss. We define the loss function to penalize exceeding the specified curvature thresh-old κmax</p>
-
-          <p>Uniform Loss. In the spatial domain, our objective is to at-tain a highly uniform distribution of points, which is achieved by penalizing variance. Moreover, 
-          we further normalize this variance by the path length of the ground truth, thereby ensuring that the network does not excessively prioritize long-distance path planning problems.</p>
-
-          <p>Obstacle Avoidance Loss. We design the loss function to emphasize the collision-free property of paths to the network</p>
+          <p>Obstacle Avoidance Loss. We design the following loss function to emphasize the collision-free property of paths to the network:
+	\begin{align}
+		&	\mathcal{L}_{obs} = w_{obs}\frac{ \sum_{i=1}^{N} (\max(0,\delta _d-S_d(\bm{x}^p_1,\mathscr{S})))^2}{N}, 
+	\end{align}
+	where $S_d$ represents the signed distance of the state point from obstacles, taking into account the shape of the robot denoted by $\mathscr{S}$.
+	$\delta_d\in\mathbb{R}^+$ is the minimum safety distance from  obstacles set by the user.
+	 The signed distance at any grid  can be obtained directly from the ESDF, and we utilize bilinear interpolation to smooth out the discontinuities caused arising from the discretization of space.$\sum_{o=1}^{4}\delta s_o$</p>
 
 
     <h1>GRADIENT-BASED TRAJECTORY OPTIMIZATION</h1>
