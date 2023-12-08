@@ -205,25 +205,25 @@ Intuitively, our aim is to first approximately determine the region proposal in 
 	0 & -1\\1 & 0\end{bmatrix} $ and the transformation of the remaining motion variables can be described as follows:
 	    
 	\begin{align}
-		v     & =  \eta ||\dot{\bm{\sigma}}_{|t}||_2,  
+		v     & =  \eta ||\dot{ {\sigma}}_{|t}||_2,  
 		\theta    =   \arctan2(\eta\dot{\sigma}_{y|t}, \eta\dot{\sigma}_{x|t}), \label{eq:v0}
     	\end{align}
 	    
     	\begin{align}
-		a  & =  \eta\frac{\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\dot{\bm{\sigma}}_{|t}}{||\dot{\bm{\sigma}}_{|t}||_2}
+		a  & =  \eta\frac{\ddot{ {\sigma}}_{|t}^\mathrm{T}\dot{ {\sigma}}_{|t}}{||\dot{ {\sigma}}_{|t}||_2}
     	\end{align}
 
     	\begin{align}
-		\phi   & =   \arctan\left(\eta\frac{\ddot{\bm{\sigma}}_{|t}^\mathrm{T} \bm{{\rm B}} \dot{\bm{\sigma}}_{|t}L   }{ {||\dot{\bm{\sigma}}_{|t}||}_2^3}\right),\label{eq:phi0}
+		\phi   & =   \arctan\left(\eta\frac{\ddot{ {\sigma}}_{|t}^\mathrm{T}  {{\rm B}} \dot{ {\sigma}}_{|t}L   }{ {||\dot{ {\sigma}}_{|t}||}_2^3}\right),\label{eq:phi0}
 	\end{align}
 
     	\begin{align}
-	    	\omega &= \eta L \frac{  \dddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}
+	    	\omega &= \eta L \frac{  \dddot{ {\sigma}}_{|t}^\mathrm{T} {{\rm B}}\dot{ {\sigma}}_{|t}
 	\end{align}
 
     	\begin{align}
 	    \dot{\bm{\sigma}}_{|t}||_2^3-3\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\dot{\bm{\sigma}}_{|t}||\dot{\bm{\sigma}}_{|t}||_2}{||\dot{\bm{\sigma}}_{|t}||_2^6+
-	(\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}L)^2}.\label{eq:omega0}
+	(\ddot{\bm{\sigma}}_{|t}^\mathrm{T}\bm{{\rm B}}\dot{\bm{\sigma}}_{|t}L)^2}
 	\end{align}
 	    
 	$\dot{ {\sigma}}_{|t}, \ddot{ {\sigma}}_{|t}$ and $ \dddot{ {\sigma}}_{|t}$
