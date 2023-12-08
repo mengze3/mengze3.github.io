@@ -66,9 +66,9 @@ redirect_from:
 
   <p>User
 In this section, we introduce the learning-based path planner that leverages the performance of the network to directly output an initial path for optimization without the need for additional sampling or searching. 
-      Our path planner takes as input the navigation start $\bm{x}^p_i$ and goal $\bm{x}^p_N$, 
+      Our path planner takes as input the navigation start ${x}^p_i$ and goal ${x}^p_N$, 
       as well as the grid-based environment $\mathcal{E}$ of size $H*W$, and directly outputs a path $\bm{\mathrm{p}} =
-    \{\bm{x}^p_1,...,\bm{x}^p_i,...,\bm{x}^p_N\} $ serialized as a sequence of multiple state points.
+    \{ {x}^p_1,...,{x}^p_i,...,{x}^p_N\} $ serialized as a sequence of multiple state points.
     Here, the resolution of each grid is defined as $r_s$. Moreover, each state point  in the path is associated with the $\mathbb{SE}(2)$ state of the robot, which includes its position and orientation angle.
     We firstly describe the network architecture, which initially estimates the distribution of each state point in the environmental space, 
       and then further reduces their uncertainty to determine the precise states of the points in the sequence. Then, we  discuss the loss function used during training, 
@@ -81,8 +81,8 @@ In this section, we introduce the learning-based path planner that leverages the
       <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
   </div>
    
-  <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer, as illustrated in Fig. \ref{fig:network}.
-In practice, directly localizing the position of a specific state point within the environment is challenging and labor-intensive. Therefore, drawing inspiration from the R-CNN~\cite{girshick2014rich}, our network follows a two-stage inference architecture.
+  <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer, as illustrated in figure.
+In practice, directly localizing the position of a specific state point within the environment is challenging and labor-intensive. Therefore, drawing inspiration from the R-CNN, our network follows a two-stage inference architecture.
 Initially, we uniformly partition $\mathcal{E}$ into $H_l * W_l$ region proposals, where each region proposal corresponds to a block of size $\frac{H}{H_l} * \frac{W}{W_l}$ in the environment. 
     The center point of each region proposal is designated as an anchor point.Subsequently, we employ the global distribution layer to obtain the probability distribution of each state point with respect to the region proposals. 
     This step involves estimating the coarse spatial distribution of the point. Next, leveraging the local correction layer, we further obtain the accurate position of the state point based on the environmental features and the probability distribution obtained earlier.
@@ -184,14 +184,7 @@ Intuitively, our aim is to first approximately determine the region proposal in 
       the motion model is represented as illustrated in Fig.2. Here, we consider a more</p>
 
       <h2>B. Dual-Layer Polynomial-Based Optimization Formulation</h2>
-    <p>In this section, we introduce the learning-based path planner that leverages the performance of the network to directly output an initial path for optimization without the need for additional sampling or searching. 
-      Our path planner takes as input the navigation start $\bm{x}^p_i$ and goal $\bm{x}^p_N$, 
-      as well as the grid-based environment $\mathcal{E}$ of size $H*W$, and directly outputs a path $\bm{\mathrm{p}} =
-    \{\bm{x}^p_1,...,\bm{x}^p_i,...,\bm{x}^p_N\} $ serialized as a sequence of multiple state points.
-    Here, the resolution of each grid is defined as $r_s$. Moreover, each state point  in the path is associated with the $\mathbb{SE}(2)$ state of the robot, which includes its position and orientation angle.
-    We firstly describe the network architecture, which initially estimates the distribution of each state point in the environmental space, 
-      and then further reduces their uncertainty to determine the precise states of the points in the sequence. Then, we  discuss the loss function used during training, 
-      which includes supervising the network's output with the ground truth  and penalizing  infeasible paths based on safety considerations and nonholonomic dynamic constraints.</p>
+    <p></p>
 
         <h2>C. Gradient Back Propagation</h2>
     <p></p>
