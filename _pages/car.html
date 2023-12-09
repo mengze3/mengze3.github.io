@@ -102,8 +102,8 @@ In this section, we introduce the learning-based path planner that leverages the
 	<p>The probability distribution $\mathcal{P}$ and latent features $\mathcal{M}$ are concatenated and fed  into the local correction layer, which outputs a tensor $\mathcal{O}$ of size $3N*H_l*W_l$. 
 	The physical meaning of this tensor $\mathcal{O}$ is to assign an orientation angle 
 	$b^{\theta}_{i,j,k}$ and positional offsets $(b^x_{i,j,k}, b^y_{i,j,k})$ relative to the anchor for each region. 
-	Instinctively, we consider selecting the region with the highest probability from $\mathcal{P}$ and retrieving the corresponding positional offset and orientation angle from $\mathcal{O}$ to accurately recover the $\mathbb{SE}$(2) state of any point along the path. However, the operation of selecting the region with the highest probability is non-differentiable, posing challenges for training. Consequently, we employ a weighted summation based on $\mathcal{P}$ to compute the state of any point, enabling differentiability and facilitating effective training:
-	\begin{small}
+	Instinctively, we consider selecting the region with the highest probability from $\mathcal{P}$ and retrieving the corresponding positional offset and orientation angle from $\mathcal{O}$ to accurately recover the $\mathbb{SE}$(2) state of any point along the path. 
+		However, the operation of selecting the region with the highest probability is non-differentiable, posing challenges for training. Consequently, we employ a weighted summation based on $\mathcal{P}$ to compute the state of any point, enabling differentiability and facilitating effective training:
 	\begin{align}
 	r^p_{x,i} &= \hat{r}^p_{x,i} + \widetilde{r}^p_{x,i}, \\
 	\hat{r}^p_{x,i} &= \sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}(j+0.5)r_s, \widetilde{r}^p_{x,i} = \sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}b^x_{i,j,k},\nonumber\\
@@ -112,11 +112,11 @@ In this section, we introduce the learning-based path planner that leverages the
 	\sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}b^y_{i,j,k},\nonumber\\
 	\theta^p_{i} &=  \sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}b^\theta_{i,j,k},\forall i \in\{1,...,N\},
 	\end{align}
-	\end{small}where $r^p_{x,i}, r^p_{y,i}$, and $\theta^p_{i}$ represent the position and orientation angle of the $i$-th state point, respectively. 
-			$\hat{r}^p_{x,i}$ and $\hat{r}^p_{y,i}$ represent the weighted sum of anchor positions based on the probability distribution $\mathcal{P}$, 
-			which can also be regarded as the output of the global distribution layer. For the sake of simplicity, we define the rough path composed of  $(\hat{r}^p_{x,i}, \hat{r}^p_{y,i})$ as $\hat{\bm{\mathrm{P}}}$. 
-			On the other hand,  $\widetilde{r}^p_{x,i}$ and $ \widetilde{r}^p_{y,i}$ refer to the weighted sum of positional offsets based on  $\mathcal{P}$,  
-			which aims to correct $\hat{\bm{\mathrm{P}}}$ and enhance its overall quality.</p>
+	where $r^p_{x,i}, r^p_{y,i}$, and $\theta^p_{i}$ represent the position and orientation angle of the $i$-th state point, respectively. 
+	$\hat{r}^p_{x,i}$ and $\hat{r}^p_{y,i}$ represent the weighted sum of anchor positions based on the probability distribution $\mathcal{P}$, 
+	which can also be regarded as the output of the global distribution layer. For the sake of simplicity, we define the rough path composed of  $(\hat{r}^p_{x,i}, \hat{r}^p_{y,i})$ as $\hat{ {\mathrm{P}}}$. 
+	On the other hand,  $\widetilde{r}^p_{x,i}$ and $ \widetilde{r}^p_{y,i}$ refer to the weighted sum of positional offsets based on  $\mathcal{P}$,  
+	which aims to correct $\hat{ {\mathrm{P}}}$ and enhance its overall quality.</p>
 
 	
 	<p></p>	
