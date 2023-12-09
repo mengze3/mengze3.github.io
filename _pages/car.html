@@ -352,7 +352,7 @@ In this section, we introduce the learning-based path planner that leverages the
 	\end{aligned}
 	\end{equation}
 	where $ {\beta}(x)$ is a natural basis function.
-	Moreover, due to the strict correspondence between each piece of the dual-layer polynomials, we can further derive the following equation from Eq. (\ref{eq:cors}):
+	Moreover, due to the strict correspondence between each piece of the dual-layer polynomials, we can further derive the following equation:
 	\begin{equation}
 	\begin{aligned}
 	s_{i,j}(0) &:= \sum_{o=1}^{j-1}\delta s_{i,o}, s_{i,j}(\delta T_i) :=s_{i,j}(0)+ \delta s_{i,j},
@@ -370,7 +370,25 @@ In this section, we introduce the learning-based path planner that leverages the
 	\end{equation}</p>	
 
 
-	<p></p>	
+	<p>For brevity, we define the total duration of the $i$-th segment of the trajectory as $T_i = M_i * \delta T_i$.
+	Then, the complete trajectory representation $\bm{\sigma}(t): [0,T_s]$ is formulated:
+	\begin{equation}
+	\begin{aligned}
+	\bm{\sigma}(t) &= \bm{\gamma}_i(s_i (t-\sum_{k=1}^{i-1}T_i)),\\
+	\forall i &\in \{1,2,...,n\},  t \in [\hat T_{i}, \hat T_{i+1}),  \\
+	\end{aligned}
+	\end{equation}
+	where $T_s = \sum_{i=1}^{n}T_i$ represents the duration of the entire trajectory, $\hat T_i = \sum_{o=1}^{i-1} T_{o}$ denotes the timestamp of the starting point of the $i$-th segment, and $\hat T_1$ is set to 0. Moreover, for subsequent derivations, we define the sets of coefficient matrices for the dual-layer polynomials
+	 $\bm{{\rm c}}^p=\left((\bm{{ c}}_1^p)^{\rm T},...,(\bm{{c}}_n^p)^{\rm T}\right)^{\rm T} \in  \mathbb{R}^{\left(\sum_{i=1}^{n}2M_iu\right) \times 2}$,
+	 $\bm{{\rm c}}^s=\left((\bm{{ c}}_1^s)^{\rm T},...,(\bm{{c}}_n^s)^{\rm T}\right)^{\rm T} \in  \mathbb{R}^{\sum_{i=1}^{n}2M_iu }$,
+	  the \textit{Pseudo Arc} set
+	  $\delta\bm{{\rm s}}=\left(\delta\bm{{s}}_1^{\rm T},...,\delta\bm{{s}}_n^{\rm T}\right)^{\rm T} \in  \mathbb{R}^{\sum_{i=1}^{n}M_i}$,
+	  , and the time set  
+	  %$\delta\bm{{\rm T}}=\left(\delta{T}_1,...,\delta{T}_n\right)^{\rm T} \in  \mathbb{R}^{n}$.
+	$\bm{{\rm T}}=\left({T}_1,...,{T}_n\right)^{\rm T} \in  \mathbb{R}^{n}$.
+	With motion feasibility constraints, the minimum  control effort problem
+	 based on the modified flatness model Eq. (\ref{eq:v1}-\ref{eq:omega1}),
+	 incorporating first-order temporal regularization, is formulated as a nonlinear constrained optimization:</p>	
 
 
 	<p></p>	
