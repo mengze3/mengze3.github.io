@@ -328,9 +328,12 @@ In this section, we introduce the learning-based path planner that leverages the
 	
 	
 	<p>Based on the front-end output, we first segment the trajectory according to the forward and backward modes.
-	The $i$-th trajectory segment $\bm{\gamma}_i(s)$ is formulated as a $M_i$-piece polynomial with degree $D = 2u-1$, which is parameterized by  the \textit{Pseudo Arc} $\delta\bm{{s}}_i = \left(\delta s_{i,1},...,\delta s_{i,M_i} \right)^{\rm T}\in  \mathbb{R}^{M_i}
-	$ corresponding to each piece and the coefficient matrix $\bm{{c}}^p_i = \left({(\bm{{c}}_{i,1}^p)}^{\rm T} ,... , {(\bm{{ c}}_{i,M_i}^p)}^{\rm T} \right)^{\rm T}\in  \mathbb{R}^{2M_iu\times 2}$.
-	Similarly, the $i$-th \textit{Pseudo Arc} $s_i(t)$ is represented as a one-dimensional and time-uniform  $M_i$-piece polynomial, parameterized by the time interval for each piece $\delta T_i$ and coefficient matrix $\bm{{c}}^s_i = \left({(\bm{{c}}_{i,1}^s)}^{\rm T} ,... , {(\bm{{ c}}_{i,M_i}^s)}^{\rm T} \right)^{\rm T}\in  \mathbb{R}^{2M_iu}$. Moreover, we consider a strict correspondence between each piece of the dual-layer piece-wise polynomials, such that for every time interval $\delta T_i$, the robot should traverse the corresponding \textit{Pseudo Arc}:
+	The $i$-th trajectory segment $ {\gamma}_i(s)$ is formulated as a $M_i$-piece polynomial with degree $D = 2u-1$, 
+		which is parameterized by  the \textit{Pseudo Arc} $\delta {{s}}_i = \left(\delta s_{i,1},...,\delta s_{i,M_i} \right)^{\rm T}\in  \mathbb{R}^{M_i}
+	$ corresponding to each piece and the coefficient matrix $ {{c}}^p_i = \left({( {{c}}_{i,1}^p)}^{\rm T} ,... , {( {{ c}}_{i,M_i}^p)}^{\rm T} \right)^{\rm T}\in  \mathbb{R}^{2M_iu\times 2}$.
+	Similarly, the $i$-th \textit{Pseudo Arc} $s_i(t)$ is represented as a one-dimensional and time-uniform  $M_i$-piece polynomial, 
+		parameterized by the time interval for each piece $\delta T_i$ and coefficient matrix $ {{c}}^s_i = \left({( {{c}}_{i,1}^s)}^{\rm T} ,... , {( {{ c}}_{i,M_i}^s)}^{\rm T} \right)^{\rm T}\in  \mathbb{R}^{2M_iu}$. 
+		Moreover, we consider a strict correspondence between each piece of the dual-layer piece-wise polynomials, such that for every time interval $\delta T_i$, the robot should traverse the corresponding \textit{Pseudo Arc}:
 	\begin{equation}
 	\begin{aligned}
 	s_i&(j*\delta T_i) = \sum_{o=1}^{j}\delta s_{i,o},\\
