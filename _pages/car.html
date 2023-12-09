@@ -82,14 +82,14 @@ In this section, we introduce the learning-based path planner that leverages the
   </div>
    
   <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer, as illustrated in Fig. \ref{fig:network}.
-In practice, directly localizing the position of a specific state point within the environment is challenging and labor-intensive. Therefore, drawing inspiration from the R-CNN, our network follows a two-stage inference architecture.
-Initially, we uniformly partition $\mathcal{E}$ into $H_l * W_l$ region proposals, where each region proposal corresponds to a block of size $\frac{H}{H_l} * \frac{W}{W_l}$ in the environment. The center point of each region proposal is designated as an anchor point.
-Subsequently, we employ the global distribution layer to obtain the probability distribution of each state point with respect to the region proposals. This step involves estimating the coarse spatial distribution of the point. Next, leveraging the local correction layer, we further obtain the accurate position of the state point based on the environmental features and the probability distribution obtained earlier.
-Intuitively, our aim is to first approximately determine the region proposal in which each state point resides and then regress its positional offset relative to the anchor, thereby recovering the global position of the point.</p>
+	In practice, directly localizing the position of a specific state point within the environment is challenging and labor-intensive. Therefore, drawing inspiration from the R-CNN, our network follows a two-stage inference architecture.
+	Initially, we uniformly partition $\mathcal{E}$ into $H_l * W_l$ region proposals, where each region proposal corresponds to a block of size $\frac{H}{H_l} * \frac{W}{W_l}$ in the environment. The center point of each region proposal is designated as an anchor point.
+	Subsequently, we employ the global distribution layer to obtain the probability distribution of each state point with respect to the region proposals. This step involves estimating the coarse spatial distribution of the point. Next, leveraging the local correction layer, we further obtain the accurate position of the state point based on the environmental features and the probability distribution obtained earlier.
+	Intuitively, our aim is to first approximately determine the region proposal in which each state point resides and then regress its positional offset relative to the anchor, thereby recovering the global position of the point.</p>
 
 	<p>The input to our network consists of the environment $\mathcal{E}$, the encoding of the start and goal states. Here, 
 	$\mathcal{E}$ is represented by a Euclidean Signed Distance Field (ESDF), where each element represents the signed distance from obstacles at that location.
-	Inspired by the work~\cite{johnson2021motion}, we adopt a start-goal encoding strategy by highlighting patches of size $c*c$ on a tensor of size $H*W$. Specifically, we assign a value of -1 to the patch representing the start point and a value of 1 to the patch representing the goal point. The remaining positions in the tensor are set as $0$.
+	We adopt a start-goal encoding strategy by highlighting patches of size $c*c$ on a tensor of size $H*W$. Specifically, we assign a value of -1 to the patch representing the start point and a value of 1 to the patch representing the goal point. The remaining positions in the tensor are set as $0$.
 	To fully represent the $\mathbb{SE}(2)$ space, we introduce two additional $H*W$ tensors to capture the cosine and sine values of the robot orientations at the start and goal locations.
 	Specifically, one tensor represents the cosine values for the patches corresponding to the starting and target points, while the other tensor represents the sine values.
 	Subsequently, the aforementioned representations of the environment and the start and goal $\mathbb{SE}(2)$ states are concatenated to form a $4*H*W$ tensor, which serves as the input to the feature extraction layer of our model. The feature extraction layer consists of a Fully Convolutional Network (FCN) and a Transformer Encoder ~\cite{vaswani2017attention}. The FCN encodes path plan problem into a high-dimensional latent space, and the size of this latent feature is downsampled to $d*H_l*W_l$ to match the shape of the probability distribution of region proposals. Here, $d$ represents the user-defined dimension of the latent features. Next, we apply the transformer module to further fuse the features within the latent space, without altering the shape of the feature tensor. For brevity, we denote the output of the feature extraction layer as $\mathcal{M}$.
@@ -98,6 +98,35 @@ Intuitively, our aim is to first approximately determine the region proposal in 
 	\begin{align}
 	\sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}=1,\forall i \in \{1,... ,N\}.
 	\end{align}</p>
+
+	<p>The probability distribution $\mathcal{P}$ and latent features $\mathcal{M}$ are concatenated and fed  into the local correction layer, which outputs a tensor $\mathcal{O}$ of size $3N*H_l*W_l$. 
+	The physical meaning of this tensor $\mathcal{O}$ is to assign an orientation angle 
+	$b^{\theta}_{i,j,k}$ and positional offsets $(b^x_{i,j,k}, b^y_{i,j,k})$ relative to the anchor for each region. 
+	Instinctively, we consider selecting the region with the highest probability from $\mathcal{P}$ and retrieving the corresponding positional offset and orientation angle from $\mathcal{O}$ to accurately recover the $\mathbb{SE}$(2) state of any point along the path. However, the operation of selecting the region with the highest probability is non-differentiable, posing challenges for training. Consequently, we employ a weighted summation based on $\mathcal{P}$ to compute the state of any point, enabling differentiability and facilitating effective training:
+	\begin{small}
+	\begin{align}
+	r^p_{x,i} &= \hat{r}^p_{x,i} + \widetilde{r}^p_{x,i}, \\
+	\hat{r}^p_{x,i} &= \sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}(j+0.5)r_s, \widetilde{r}^p_{x,i} = \sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}b^x_{i,j,k},\nonumber\\
+	r^p_{y,i} &= \hat{r}^p_{y,i} + \widetilde{r}^p_{y,i},\\
+	\hat{r}^p_{y,i}&=\sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}(k+0.5)r_s, \widetilde{r}^p_{y,i} = 
+	\sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}b^y_{i,j,k},\nonumber\\
+	\theta^p_{i} &=  \sum_{j=0}^{H_l-1}\sum_{k=0}^{W_l-1}\varrho_{i,j,k}b^\theta_{i,j,k},\forall i \in\{1,...,N\},
+	\end{align}
+	\end{small}where $r^p_{x,i}, r^p_{y,i}$, and $\theta^p_{i}$ represent the position and orientation angle of the $i$-th state point, respectively. 
+			$\hat{r}^p_{x,i}$ and $\hat{r}^p_{y,i}$ represent the weighted sum of anchor positions based on the probability distribution $\mathcal{P}$, 
+			which can also be regarded as the output of the global distribution layer. For the sake of simplicity, we define the rough path composed of  $(\hat{r}^p_{x,i}, \hat{r}^p_{y,i})$ as $\hat{\bm{\mathrm{P}}}$. 
+			On the other hand,  $\widetilde{r}^p_{x,i}$ and $ \widetilde{r}^p_{y,i}$ refer to the weighted sum of positional offsets based on  $\mathcal{P}$,  
+			which aims to correct $\hat{\bm{\mathrm{P}}}$ and enhance its overall quality.</p>
+
+	
+	<p></p>	
+
+
+	
+	<p></p>	
+
+
+	
      
   <p>1) Feature Extraction: In this component, the FCN consists of four dual-convolution layers. The first dual-convolution layer does not alter the width and height of the tensor, but only increases the number of channels. 
     The subsequent three dual-convolution layers downsample the tensor in width and height, while doubling the number of channels after each layer.	Moreover, 
