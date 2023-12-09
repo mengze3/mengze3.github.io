@@ -393,21 +393,21 @@ In this section, we introduce the learning-based path planner that leverages the
 
 	<p>
 	\begin{align}
-	\min_{\bm{{\rm c}}^p,\bm{{\rm c}}^s,\delta\bm{{\rm s}},\bm{{\rm T}} } J({\bm{{\rm c}}^p,\bm{{\rm c}}^s,\delta\bm{{\rm s}},\bm{{\rm T}} }) = \int_{0}^{T_s} \bm{\sigma}^{(u)}(t)^{\rm T} \bm{\sigma}^{(u)}(t)dt + \rho T_s   \label{eq:originopt}
+	\min_{ {{\rm c}}^p, {{\rm c}}^s,\delta {{\rm s}}, {{\rm T}} } J({ {{\rm c}}^p, {{\rm c}}^s,\delta {{\rm s}}, {{\rm T}} }) = \int_{0}^{T_s}  {\sigma}^{(u)}(t)^{\rm T}  {\sigma}^{(u)}(t)dt + \rho T_s   \label{eq:originopt}
 	\end{align}
 	\setlength\abovedisplayskip{0.1pt}
 	\begin{align}
 	{\rm s.t.} 	
-	&\mathcal{B}_{ini}(\bm{\sigma}(0),...,\bm{\sigma}^{(u-1)}(0)) = 0, \label{eq:initial_boundary}
+	&\mathcal{B}_{ini}( {\sigma}(0),..., {\sigma}^{(u-1)}(0)) = 0, \label{eq:initial_boundary}
 	\end{align}
 
 	
 	\begin{align}
-	&\mathcal{B}_{fin}(\bm{\sigma}(T_s),...,\bm{\sigma}^{(u-1)}(T_s)) = 0, \label{eq:final_boundary}
+	&\mathcal{B}_{fin}( {\sigma}(T_s),..., {\sigma}^{(u-1)}(T_s)) = 0, \label{eq:final_boundary}
 	\end{align}
 
 	\begin{align}
-	&\bm{\gamma}^{[\widetilde d]}_{i,j}(\sum_{k=1}^{j} \delta s_{i,k}) = \bm{\gamma}^{[\widetilde d]}_{i,j+1}(\sum_{k=1}^{j} \delta s_{i,k}), \label{eq:continuityrs} 
+	& {\gamma}^{[\widetilde d]}_{i,j}(\sum_{k=1}^{j} \delta s_{i,k}) =  {\gamma}^{[\widetilde d]}_{i,j+1}(\sum_{k=1}^{j} \delta s_{i,k}), \label{eq:continuityrs} 
 	\end{align}
 
 	\begin{align}
@@ -419,7 +419,7 @@ In this section, we introduce the learning-based path planner that leverages the
 	\end{align}
 		
 	\begin{align}
-	&||\dot{\bm{\gamma}}_{i|s}(s_i(t))||_2 > \alpha,  \label{eq:mini vel}
+	&||\dot{ {\gamma}}_{i|s}(s_i(t))||_2 > \alpha,  \label{eq:mini vel}
 	\end{align}
 
 	\begin{align}
@@ -427,7 +427,7 @@ In this section, we introduce the learning-based path planner that leverages the
 	\end{align}
 
 	\begin{align}
-	&\mathcal{G}(\bm{\gamma}_i(s_i(t)), ...,\bm{\gamma}_{i|s}^{(u)}(s_i(t)),
+	&\mathcal{G}( {\gamma}_i(s_i(t)), ..., {\gamma}_{i|s}^{(u)}(s_i(t)),
 	s_i(t),...,	s_{i|t}^{(u)}(t)
 	 )\preceq 0,    \label{eq:user}
 	\end{align}
