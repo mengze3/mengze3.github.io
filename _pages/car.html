@@ -223,6 +223,13 @@ In this section, we introduce the learning-based path planner that leverages the
       Finally, we discribe the gradient backpropagation computation process and practical solution details specific to this optimization formulation.</p>
   
     <h2>A. Differential Flatness-Based Vehicle Model</h2>
+
+	<div class="center">
+	<img  width="640" height="320" src="https://github.com/mengze3/mengze3.github.io/blob/6283c629a1581614069793aa089605617c92e3b5/_pages/car.png?raw=true" alt="">
+	</div>
+
+
+	
     <p>We employ the simplified kinematic bicycle model to depict a four-wheel vehicle. Under the assumption of front-wheel drive and flawless rolling with no slippage, the motion model is represented as illustrated in Fig.\ref{fig:difmodel}. 
 	Here, we consider a more detailed and accurate dynamic model: $\left(p_x, p_y, \theta, v, a, \phi, \omega\right)^{\rm T}$,
 	\begin{align}
@@ -273,6 +280,14 @@ In this section, we introduce the learning-based path planner that leverages the
 	Hence, leveraging the inherent differential flatness property, we can employ the flat outputs and their finite derivatives to represent various state variables of the robot, thereby streamlining trajectory planning and enhancing optimization processes.</p>
 
       <h2>B. Dual-Layer Polynomial-Based Optimization Formulation</h2>
+
+
+	<div class="center">
+	<img  width="640" height="320" src="https://github.com/mengze3/mengze3.github.io/blob/6283c629a1581614069793aa089605617c92e3b5/_pages/transition.png?raw=true" alt="">
+	</div>
+
+
+	
     <p>In our previous work, we parametrized the flat output $ {\sigma}$ directly as a piecewise polynomial function of time. 
 	    While this method is efficient and straightforward, Eq. (\ref{eq:phi0}) and Eq. (\ref{eq:omega0}) face singularities when the robot's velocity $\dot{ {\sigma}}_{|t}$ is zero. 
 	    This led to numerical instability in the optimization process, making it difficult to guarantee strict satisfaction of constraints. By contrast, 
@@ -330,6 +345,11 @@ In this section, we introduce the learning-based path planner that leverages the
 		eliminating the original singularity point. Next, we provide a detailed exposition of the parametric form of $ {\sigma}(t) = {\gamma}(s(t))$ based on dual-layer piece-wise polynomials.</p>
 
 	
+
+	<div class="center">
+	<img  width="640" height="320" src="https://github.com/mengze3/mengze3.github.io/blob/6283c629a1581614069793aa089605617c92e3b5/_pages/seg.png?raw=true" alt="">
+	</div>
+
 	
 	<p>Based on the front-end output, we first segment the trajectory according to the forward and backward modes.
 	The $i$-th trajectory segment $ {\gamma}_i(s)$ is formulated as a $M_i$-piece polynomial with degree $D = 2u-1$, 
