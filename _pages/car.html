@@ -44,6 +44,10 @@ redirect_from:
 <body>
 
 
+
+
+
+	
     <h1>Contributions</h1>
     <p>• We propose a lightweight two-stage neural network that is capable of learning a path connecting the start and goal SE(2) states directly from the environment. 
       A salient feature of our algorithm is its independence from tradi-tional sampling or search algorithms, which significantly enhances time efficiency and temporal stability. 
@@ -78,7 +82,7 @@ In this section, we introduce the learning-based path planner that leverages the
    <h2>A. Neural Network Architecture</h2>
     
   <div class="center">
-      <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
+      <img  width="1040" height="680" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
   </div>
    
   <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer, as illustrated in Fig. \ref{fig:network}.
@@ -441,13 +445,9 @@ In this section, we introduce the learning-based path planner that leverages the
 	respectively. Eq. (\ref{eq:continuityrs})(\ref{eq:continuityscale}) denotes the continuity constraints up to degree $\widetilde{d}$ at the junctions of the piece-wise 
 	polynomials. Eq. (\ref{eq:temporal}) and Eq. (\ref{eq:scale}) correspond to positive-definite constraints on time and \textit{Pseudo Velocity}, respectively. Eq. (\ref{eq:mini vel}) is a minimum
 	\textit{Pseudo Velocity} constraint introduced to avoid singularities, where $\alpha$ is a threshold value. $\mathcal{G}$ encompasses common inequality constraints considered in trajectory planning problems, 
-	including dynamic feasibility and obstacle avoidance constraints, the specific forms of which can be found in our previous work~\cite{zhichaohan}.</p>	
-
-
-        <h2>C. Gradient Back Propagation</h2>
-    <p></p>
-
-      <h1>EVALUATIONS</h1>
+	including dynamic feasibility and obstacle avoidance constraints, the specific forms of which can be found in our previous work.</p>	
     
-  
+
+	<h1>EVALUATIONS</h1>
+	
 </body>
