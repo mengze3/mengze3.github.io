@@ -374,13 +374,13 @@ In this section, we introduce the learning-based path planner that leverages the
 	Then, the complete trajectory representation $ {\sigma}(t): [0,T_s]$ is formulated:
 	\begin{equation}
 	\begin{aligned}
-	\bm{\sigma}(t) &=  {\gamma}_i(s_i (t-\sum_{k=1}^{i-1}T_i)),\\
+	 {\sigma}(t) &=  {\gamma}_i(s_i (t-\sum_{k=1}^{i-1}T_i)),\\
 	\forall i &\in \{1,2,...,n\},  t \in [\hat T_{i}, \hat T_{i+1}),  \\
 	\end{aligned}
 	\end{equation}
 	where $T_s = \sum_{i=1}^{n}T_i$ represents the duration of the entire trajectory, $\hat T_i = \sum_{o=1}^{i-1} T_{o}$ denotes the timestamp of the starting point of the $i$-th segment, and $\hat T_1$ is set to 0. Moreover, for subsequent derivations, we define the sets of coefficient matrices for the dual-layer polynomials
 	 $ {{\rm c}}^p=\left(( {{ c}}_1^p)^{\rm T},...,( {{c}}_n^p)^{\rm T}\right)^{\rm T} \in  \mathbb{R}^{\left(\sum_{i=1}^{n}2M_iu\right) \times 2}$,
-	 $ {{\rm c}}^s=\left((\bm{{ c}}_1^s)^{\rm T},...,( {{c}}_n^s)^{\rm T}\right)^{\rm T} \in  \mathbb{R}^{\sum_{i=1}^{n}2M_iu }$,
+	 $ {{\rm c}}^s=\left(( {{ c}}_1^s)^{\rm T},...,( {{c}}_n^s)^{\rm T}\right)^{\rm T} \in  \mathbb{R}^{\sum_{i=1}^{n}2M_iu }$,
 	  the <i>Pseudo Arc</i> set
 	  $\delta {{\rm s}}=\left(\delta {{s}}_1^{\rm T},...,\delta {{s}}_n^{\rm T}\right)^{\rm T} \in  \mathbb{R}^{\sum_{i=1}^{n}M_i}$,
 	  , and the time set  
@@ -391,7 +391,57 @@ In this section, we introduce the learning-based path planner that leverages the
 	 incorporating first-order temporal regularization, is formulated as a nonlinear constrained optimization:</p>	
 
 
-	<p></p>	
+	<p>
+	\begin{align}
+	\min_{\bm{{\rm c}}^p,\bm{{\rm c}}^s,\delta\bm{{\rm s}},\bm{{\rm T}} } J({\bm{{\rm c}}^p,\bm{{\rm c}}^s,\delta\bm{{\rm s}},\bm{{\rm T}} }) = \int_{0}^{T_s} \bm{\sigma}^{(u)}(t)^{\rm T} \bm{\sigma}^{(u)}(t)dt + \rho T_s   \label{eq:originopt}
+	\end{align}
+	\setlength\abovedisplayskip{0.1pt}
+	\begin{align}
+	{\rm s.t.} 	
+	&\mathcal{B}_{ini}(\bm{\sigma}(0),...,\bm{\sigma}^{(u-1)}(0)) = 0, \label{eq:initial_boundary}
+	\end{align}
+
+	
+	\begin{align}
+	&\mathcal{B}_{fin}(\bm{\sigma}(T_s),...,\bm{\sigma}^{(u-1)}(T_s)) = 0, \label{eq:final_boundary}
+	\end{align}
+
+	\begin{align}
+	&\bm{\gamma}^{[\widetilde d]}_{i,j}(\sum_{k=1}^{j} \delta s_{i,k}) = \bm{\gamma}^{[\widetilde d]}_{i,j+1}(\sum_{k=1}^{j} \delta s_{i,k}), \label{eq:continuityrs} 
+	\end{align}
+
+	\begin{align}
+	&s^{[\widetilde d]}_{i,j}(\delta T_i) = s^{[\widetilde d]}_{i,j+1}(0), \label{eq:continuityscale}
+	\end{align}
+
+	\begin{align}
+	&T_i > 0,  \label{eq:temporal}  
+	\end{align}
+		
+	\begin{align}
+	&||\dot{\bm{\gamma}}_{i|s}(s_i(t))||_2 > \alpha,  \label{eq:mini vel}
+	\end{align}
+
+	\begin{align}
+	&s_i^{(1)}(t) \geq 0, \forall t \in [0, T_i], \label{eq:scale}
+	\end{align}
+
+	\begin{align}
+	&\mathcal{G}(\bm{\gamma}_i(s_i(t)), ...,\bm{\gamma}_{i|s}^{(u)}(s_i(t)),
+	s_i(t),...,	s_{i|t}^{(u)}(t)
+	 )\preceq 0,    \label{eq:user}
+	\end{align}
+
+	\begin{align}
+	&\forall i \in \{1,...,n\}, \forall j \in \{1,...,M_i-1\},\forall t \in [0, T_i].\label{eq:originopt1}
+	\end{align}
+
+	$u=3$ is the control dimension and $\rho\in \mathbb{R}^+$ is a user-defined weight for
+	the time regularization term to restrict the total duration $T_s$. Eq. (\ref{eq:initial_boundary}) and Eq. (\ref{eq:final_boundary}) represent the initial and final state constraints of the trajectory, 
+	respectively. Eq. (\ref{eq:continuityrs})(\ref{eq:continuityscale}) denotes the continuity constraints up to degree $\widetilde{d}$ at the junctions of the piece-wise 
+	polynomials. Eq. (\ref{eq:temporal}) and Eq. (\ref{eq:scale}) correspond to positive-definite constraints on time and \textit{Pseudo Velocity}, respectively. Eq. (\ref{eq:mini vel}) is a minimum
+	\textit{Pseudo Velocity} constraint introduced to avoid singularities, where $\alpha$ is a threshold value. $\mathcal{G}$ encompasses common inequality constraints considered in trajectory planning problems, 
+	including dynamic feasibility and obstacle avoidance constraints, the specific forms of which can be found in our previous work~\cite{zhichaohan}.</p>	
 
 
         <h2>C. Gradient Back Propagation</h2>
