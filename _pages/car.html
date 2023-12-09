@@ -342,16 +342,16 @@ In this section, we introduce the learning-based path planner that leverages the
 	\end{equation}
 	where $n$ is the number of trajectory segments.</p>
 
-	<p>Based on the above modeling, the $j$-th piece  of the $i$-th segment $\bm{\gamma}_{i,j}$ is represented as:
+	<p>Based on the above modeling, the $j$-th piece  of the $i$-th segment $ {\gamma}_{i,j}$ is represented as:
 	\begin{equation}
 	\begin{aligned}
-	\bm{\gamma}_{i,j}(s_{i,j}) &:=  {(\bm{{ c}}_{i,j}^p)}^{\rm T} \bm{\beta}(s_{i,j} - \sum_{o=1}^{j-1}\delta s_{i,o}),\\ 
-	s_{i,j}(t) &:= {(\bm{{ c}}_{i,j}^s)}^{\rm T} \bm{\beta}(t),\forall  t \in [0, \delta T_i],\\
-	\bm{\beta}(x) &:= \left(1, x, x^2, ..., x^N\right)^{\rm T},  
+	 {\gamma}_{i,j}(s_{i,j}) &:=  {( {{ c}}_{i,j}^p)}^{\rm T}  {\beta}(s_{i,j} - \sum_{o=1}^{j-1}\delta s_{i,o}),\\ 
+	s_{i,j}(t) &:= {( {{ c}}_{i,j}^s)}^{\rm T}  {\beta}(t),\forall  t \in [0, \delta T_i],\\
+	 {\beta}(x) &:= \left(1, x, x^2, ..., x^N\right)^{\rm T},  
 	\\ \forall i & \in \{1,2,...,n\}, \forall j \in \{1,2,3,...,M_i\}, \\
 	\end{aligned}
 	\end{equation}
-	where $\bm{\beta}(x)$ is a natural basis function.
+	where $ {\beta}(x)$ is a natural basis function.
 	Moreover, due to the strict correspondence between each piece of the dual-layer polynomials, we can further derive the following equation from Eq. (\ref{eq:cors}):
 	\begin{equation}
 	\begin{aligned}
@@ -360,10 +360,10 @@ In this section, we introduce the learning-based path planner that leverages the
 	\end{aligned}
 	\end{equation}
 	where $s_{i,1}(0)$ is set as $0$.
-	Furturemore, the $M_i$-piece polynomial  $\bm{\gamma}_i$ is obtained:
+	Furturemore, the $M_i$-piece polynomial  $ {\gamma}_i$ is obtained:
 	\begin{equation}
 	\begin{aligned}
-	\bm{\gamma}_i(s_i) = & \bm{\gamma}_{i,j} (s_i), 
+	 {\gamma}_i(s_i) = &  {\gamma}_{i,j} (s_i), 
 	s_i(t) =  s_{i,j} (t-(j-1)*\delta T_i),\\
 	\forall j \in& \{1,2,...,M_i\}, t \in [(j-1)*\delta T_i, j*\delta T_i).
 	\end{aligned}
