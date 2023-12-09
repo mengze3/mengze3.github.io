@@ -125,27 +125,6 @@ In this section, we introduce the learning-based path planner that leverages the
 	$({r}^p_{x,i}, {r}^p_{y,i})$
 	Next, we provide the implementation details of each major part of the network.</p>	
 
-
-	
-	<p>\begin{itemize}
-	\item [1)] \textbf{Feature Extraction}: 
-	In this component, the FCN consists of four dual-convolution layers. The first dual-convolution layer does not alter the width and height of the tensor, but only increases the number of channels. The subsequent three dual-convolution layers downsample the tensor in width and height, while doubling the number of channels after each layer.	Moreover, MaxPool is employed for downsampling, and ReLU and Batch Normalization are nested between convolutions to enhance the generalization performance.	Then, the output of the FCN is reshaped row-wise into a size of $d*(H_lW_l)$ and undergoes positional encoding before being fed into the Transformer Encoder. The Transformer module further learns the relationships between these latent features through multi-headed self-attention and multilayer perceptron blocks.
-	\item [2)] \textbf{Global Distribution}:
-	This module predicts the probability distribution of N state points in the downsampled space, hence the output tensor dimension should be $N * H_l * W_l$.
-	For this purpose, we efficiently implement this operation using two layers of $3*3$ padding convolutions. Additionally, we perform Softmax  on each channel of the output tensor to ensure proper  probability normalization.
-	\item [3)]\textbf{Local Correction}: 
-	Similar to the previous module, we employ two layers of $3*3$ padding convolutions to assign the orientation angle and position offsets relative to the anchor for each  region. The output tensor has dimensions of $3N * H_l * W_l$. Furthermore, we apply the Sigmoid activation function to limit the position offsets of the network output, ensuring that the corrected point remains in the vicinity of the anchor. 
-	\end{itemize}</p>
-
-	<p></p>	
-
-
-	<p></p>	
-
-
-	<p></p>	
-
-
 	
      
   <p>1) Feature Extraction: In this component, the FCN consists of four dual-convolution layers. The first dual-convolution layer does not alter the width and height of the tensor, but only increases the number of channels. 
@@ -345,6 +324,28 @@ In this section, we introduce the learning-based path planner that leverages the
 		even during the transition between forward and backward motion states with zero velocity, we can ensure that $\dot{ {\gamma}}_{|s}$ remains non-zero. Consequently, 
 		the denominator of Eq. (\ref{eq:at1}-\ref{eq:omega1})  are strictly positive, 
 		eliminating the original singularity point. Next, we provide a detailed exposition of the parametric form of $ {\sigma}(t) = {\gamma}(s(t))$ based on dual-layer piece-wise polynomials.</p>
+
+	
+	
+	<p>Based on the front-end output, we first segment the trajectory according to the forward and backward modes.
+	The $i$-th trajectory segment $\bm{\gamma}_i(s)$ is formulated as a $M_i$-piece polynomial with degree $D = 2u-1$, which is parameterized by  the \textit{Pseudo Arc} $\delta\bm{{s}}_i = \left(\delta s_{i,1},...,\delta s_{i,M_i} \right)^{\rm T}\in  \mathbb{R}^{M_i}
+	$ corresponding to each piece and the coefficient matrix $\bm{{c}}^p_i = \left({(\bm{{c}}_{i,1}^p)}^{\rm T} ,... , {(\bm{{ c}}_{i,M_i}^p)}^{\rm T} \right)^{\rm T}\in  \mathbb{R}^{2M_iu\times 2}$.
+	Similarly, the $i$-th \textit{Pseudo Arc} $s_i(t)$ is represented as a one-dimensional and time-uniform  $M_i$-piece polynomial, parameterized by the time interval for each piece $\delta T_i$ and coefficient matrix $\bm{{c}}^s_i = \left({(\bm{{c}}_{i,1}^s)}^{\rm T} ,... , {(\bm{{ c}}_{i,M_i}^s)}^{\rm T} \right)^{\rm T}\in  \mathbb{R}^{2M_iu}$. Moreover, we consider a strict correspondence between each piece of the dual-layer piece-wise polynomials, such that for every time interval $\delta T_i$, the robot should traverse the corresponding \textit{Pseudo Arc}:
+	\begin{equation}
+	\begin{aligned}
+	s_i&(j*\delta T_i) = \sum_{o=1}^{j}\delta s_{i,o},\\
+	\forall i & \in \{1,2,...,n\}, \forall j \in \{1,2,3,...,M_i\},\label{eq:cors}
+	\end{aligned}
+	\end{equation}
+	where $n$ is the number of trajectory segments.</p>
+
+	<p></p>	
+
+
+	<p></p>	
+
+
+	<p></p>	
 
 
         <h2>C. Gradient Back Propagation</h2>
