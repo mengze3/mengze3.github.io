@@ -79,19 +79,19 @@ redirect_from:
 
     <h1>Project overview</h1>
 
-    <div class="container">
-        <div class="video">
-              <iframe src="//player.bilibili.com/player.html?aid=367037667&bvid=BV1i94y1P7Pq&cid=1361961047&p=1" scrolling="no" border="0" 
+
+              <iframe width="700" height="480" src="//player.bilibili.com/player.html?aid=367037667&bvid=BV1i94y1P7Pq&cid=1361961047&p=1" scrolling="no" border="0" 
                 frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-        </div>
-        <div class="text">
+
             <p>
                 I assembled a quadcopter robot and designed algorithms to achieve autonomous hovering and motion control
                 of the
-                robot using motion capture systems and drone control software
+                robot using motion capture systems and drone control software.
+              I conducted tests on a real drone using my control algorithms. I tested both a linear control algorithm and an advanced SE3 (Special Euclidean Group SE(3)) control algorithm, 
+              and verified that the SE3 algorithm outperformed the linear algorithm. During the experiment, I first manually took off the drone using the remote controller. 
+              Once the drone was stable, I switched it to programmatic control. 
+              At this point, the drone's yaw would rotate 180 degrees, indicating the transition from manual mode to automatic hover mode.
             </p>
-        </div>
-    </div>
 
     <h2>
         Dynamic Model of Quadcopter Robot
