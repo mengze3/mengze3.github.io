@@ -37,12 +37,13 @@ redirect_from:
 
 
     <h1>Project overview</h1>
-    <div class="center">
+<!--     <div class="center"> -->
       <iframe width="700" height="480" src="//player.bilibili.com/player.html?aid=749578770&bvid=BV1aC4y1F7Y2&cid=1361889994&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-    </div>
-      <p>This subsection addresses the challenge of finding an efficient path for the drone that not only reaches the target but also considers potential obstacles and occlusion issues.
-    This is a hierarchical method that first identifies multiple goals or waypoints that the drone should reach to maintain visibility of the target. These goals are selected based on their distance to the target and potential occlusion.
-    A greedy algorithm is employed to enhance the efficiency of the path-finding process. This algorithm ensures that the path is not only safe and visible but also computationally feasible for real-time applications.</p>
+<!--     </div> -->
+      <p>Our drone is required to perform a task of patrolling along a black line on the ground. The black line on the ground forms the shape of the letter "M." 
+        We built a drone from scratch and fine-tuned the controller to enable the drone to autonomously complete the patrolling mission. We secured the second position in this competition.</p>
+      <p>In the experimental environment, there were some pillar obstacles. We set up waypoints to assist the drone in completing the patrolling mission. 
+        In the video, the real-time visualization in the bottom left corner shows the map stored by the drone and the waypoints we set. The small dark green balls represent the waypoints we set.</p>
     
     <!-- 大标题 -->
     <h1>Building a drone and tuning the controller</h1>
