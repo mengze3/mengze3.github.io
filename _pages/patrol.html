@@ -1,9 +1,6 @@
 ---
-title: "Vision
--
-Based Object Tracking for UAV in National
--
-level Student Research Training Program (SRTP)"
+title: "Zhejiang University UAV Line Patrol Competition
+"
 permalink: /patrol/
 author_profile: true
 redirect_from:
@@ -44,23 +41,15 @@ redirect_from:
 
     <h1>Project overview</h1>
 
-      <div class="container">
-          <div class="video">
-              <iframe src="//player.bilibili.com/player.html?aid=975694433&bvid=BV1o44y1b7wC&cid=412685370&p=1" frameborder="no" allowfullscreen="true"></iframe>
-          </div>
-          <div class="text">
-              <p>Leading a national-level Student Research Training Program (SRTP) titled "Vision-Based Object Tracking for UAV," 
-              I orchestrated the development of a complete UAV system by integrating key components: mapping, planning, 
-              target recognition, localization, and control. Building upon FastLab's Elastic tracker as a foundation, 
-              I have enhanced the robustness of the recognition algorithm.</p>
-          </div>
-      </div>
-    <!-- 大标题 -->
-    <h1>Target tracking and control</h1>
-
-<iframe width="840" height="500" src="//player.bilibili.com/player.html?aid=366865413&bvid=BV1f94y1j78r&cid=1354193017&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+    <iframe src="//player.bilibili.com/player.html?aid=749578770&bvid=BV1aC4y1F7Y2&cid=1361889994&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+    <p>This subsection addresses the challenge of finding an efficient path for the drone that not only reaches the target but also considers potential obstacles and occlusion issues.
+    This is a hierarchical method that first identifies multiple goals or waypoints that the drone should reach to maintain visibility of the target. These goals are selected based on their distance to the target and potential occlusion.
+    A greedy algorithm is employed to enhance the efficiency of the path-finding process. This algorithm ensures that the path is not only safe and visible but also computationally feasible for real-time applications.</p>
     
-   <h2>Hierarchical Multi-goal Path Finding</h2>
+    <!-- 大标题 -->
+    <h1>Building a drone and tuning the controller</h1>
+
+    
   <div class="center">
       <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp1.PNG?raw=true" alt="">
   </div>
@@ -69,29 +58,8 @@ This is a hierarchical method that first identifies multiple goals or waypoints 
 A greedy algorithm is employed to enhance the efficiency of the path-finding process. This algorithm ensures that the path is not only safe and visible but also computationally feasible for real-time applications.</p>
 
 
-   <h2>Safe Flight Corridor Generation</h2>
-  <div class="center">
-      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp2.PNG?raw=true" alt="">
-  </div>
-    <p>This section discusses the generation of a safe flight corridor (SFC) that the drone can follow without colliding with obstacles.
-Previous methods in safe flight corridor generation often faced limitations, especially in complex environments where the drone must maneuver through tight spaces or avoid moving obstacles.
-I utilize a novel approach to generate a more flexible and safer corridor, which adapts to the environment and the drone's dynamic constraints, ensuring a higher level of safety during flight.</p>
 
-
-     <h2>Visible Region Generation</h2>
-  <div class="center">
-      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp3.PNG?raw=true" alt="">
-  </div>
-    <p>The aim here is to ensure that the drone maintains a line of sight to the target during the tracking mission.
-A key contribution of this subsection is the development of a sector-shaped visible region for each predicted position of the target.
-This visible region is designed to account for potential occlusions and to guide the drone in maintaining an optimal position for visibility. 
-      It is a crucial part of the system, ensuring that the target remains within the drone's field of view throughout the tracking process.</p>
-
-
-    <h1>Target recognition and localization</h1>
-  
-    <img src="https://github.com/mengze3/mengze3.github.io/blob/85ed4283c001b95214b7627a670d0f036b9bd630/_pages/old_detect.png?raw=true" alt="original detection">
-    <p>  A formidable obstacle surfaced: the low accuracy of image recognition, attributed to inadequate data stemming from the diverse scenes encountered during UAV flights.</p>
+    <h1>VINS Localization</h1>
 
       <div class="center">
         <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/4b73183ed170615e62c442be03e2334af1856149/_pages/flur1.jpg?raw=true" alt="">
@@ -99,38 +67,5 @@ This visible region is designed to account for potential occlusions and to guide
     <p>    To tackle this challenge, we implemented innovative measures to augment our dataset. Recording videos enabled us to capture dynamic UAV images in flight, 
       expanding the range of perspectives and scenarios for more diverse training data. Additionally, we incorporated a jitter to simulate visual instability encountered in actual
       flights, enhancing the realism of our training data.</p>
-
-    <img src="https://github.com/mengze3/mengze3.github.io/blob/629a88ce29542fd2cee39b2c2a2153936f48cf86/_pages/new_detect.png?raw=true" alt="improved detection">
-    <table border="1">
-    <tr>
-      <th style="text-align: center;"></th>
-      <th style="text-align: center;">original detection</th>
-      <th style="text-align: center;">improved detection</th>
-    </tr>
-    <tr>
-      <td style="text-align: center;">Precision(%)</td>
-      <td style="text-align: center;">63</td>
-      <td style="text-align: center;">98</td>
-    </tr>
-    <tr>
-      <td style="text-align: center;">Recall(%)</td>
-     <td style="text-align: center;">36</td>
-      <td style="text-align: center;">97</td>
-    </tr>
-  </table>
-    <p>    Through persistent efforts and optimization, our image recognition accuracy experienced a substantial boost, with recall rates increasing from 36% to 97% and precision surging from 68% to 98%.
-      This remarkable improvement has significantly bolstered the robustness of our robot tracking. Particularly noteworthy is that when the confidence (threshold) is set at 0.5, 
-      the system demonstrates exceptionally high reliability and efficiency.</p>
-
-
-    <img src="https://github.com/mengze3/mengze3.github.io/blob/2a12037a0b6628c7cc9cf14e5cf4312e5e556653/_pages/yolo.png?raw=true" alt="improved detection">
-    <p>The left side of the image shows examples of objects identified by the trained model, while the right side displays charts of various training metrics. 
-      These charts include changes in the loss function, as well as variations in evaluation metrics such as precision, recall, and mean Average Precision (mAP).</p>
-    <p>Loss Function: The train/box_loss, train/obj_loss, train/cls_loss, and corresponding validation set losses val/box_loss, val/obj_loss, 
-      val/cls_loss all show a gradual decrease with increasing training epochs, indicating that the model is progressively improving, learning to better identify and classify objects.</p>
-    <p>Precision and Recall: The metrics/precision and metrics/recall charts show that both these metrics are high, close to 1.0, 
-      indicating that the model can correctly identify most true positives and rarely misclassifies negatives as positives.</p>
-    <p>Mean Average Precision (mAP): The metrics/mAP_0.5 and metrics/mAP_0.5:0.95 represent the mAP at IoU (Intersection over Union) thresholds of 0.5 and between 0.5 to 0.95, respectively. 
-      Both of these metrics also exhibit high values, especially the metrics/mAP_0.5 is near perfect, signifying that the model performs well across different IoU thresholds</p>
   
 </body>
