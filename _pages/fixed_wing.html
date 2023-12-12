@@ -83,7 +83,7 @@ redirect_from:
 
 
   <div class="center">
-    <img  src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_2.png?raw=true" alt="">
+    <img  width="300" height="200" src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_2.png?raw=true" alt="">
   </div>
 
 
@@ -100,7 +100,7 @@ redirect_from:
     where i refers to the i-th segment. In this project, the optimization formulation for trajectory planning is as follows:</p>
 
   <div class="center">
-    <img  src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_3.png?raw=true" alt="">
+    <img  width="300" height="200" src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_3.png?raw=true" alt="">
   </div>
 
   <p>In the formulation, d represents the dimension of the control variable, and the integral term has the physical interpretation of minimizing energy to improve trajectory smoothness. 
@@ -159,6 +159,17 @@ redirect_from:
       The black line represents the path output by the front-end RRT* algorithm, while the yellow line represents the trajectory further optimized through back-end numerical optimization. 
       From the image, we can observe that while ensuring the kinematic feasibility of the trajectory, 
       the yellow curve will try to closely follow the mountainous regions (light blue-green areas) to achieve high concealment flight.</p>
+
+
+    <div class="center">
+        <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/c82a7381f9d0a2d9d0f62100ed284e53330eab9c/_pages/terrain_7.png?raw=true" alt="">
+    </div>
+
+
+    <p>The y-axis of the graph represents the terrain difference at each position, while the x-axis represents the arc length (distance traveled). From the graph, 
+      we can see that the aircraft will try to fly towards areas with larger terrain differences to ensure a higher level of concealment during flight. 
+      This means that the aircraft tends to prefer flying in regions where there are significant changes in terrain, in order to take advantage of the terrain's masking effect. 
+      This strategy helps the aircraft reduce the probability of detection during flight and increases its level of concealment.</p>
 
   
     <h1>Learning-Aided Fixed-Wing Long-Range Covert Flight Optimization </h1>
