@@ -75,7 +75,7 @@ redirect_from:
       Here, the terrain difference will be defined as the elevation difference within a prescribed square area centered on the state points.</p>
 
     <div class="center">
-      <img  width="200" height="150"src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_1.png?raw=true" alt="">
+      <img  width="400" height="300"src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_1.png?raw=true" alt="">
     </div>
 
 
@@ -100,7 +100,7 @@ redirect_from:
     where i refers to the i-th segment. In this project, the optimization formulation for trajectory planning is as follows:</p>
 
   <div class="center">
-    <img  src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_2.png?raw=true" alt="">
+    <img  src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_3.png?raw=true" alt="">
   </div>
 
   <p>In the formulation, d represents the dimension of the control variable, and the integral term has the physical interpretation of minimizing energy to improve trajectory smoothness. 
@@ -119,12 +119,33 @@ redirect_from:
     <img  src="https://github.com/mengze3/mengze3.github.io/blob/fb27cd3045091bd28d09e42ff86885a3bf5f687e/_pages/terrain_4.png?raw=true" alt="">
   </div>
     
+  <p>This method reduces the number of optimization variables in trajectory planning and eliminates equality constraints, greatly increasing planning efficiency. 
+    Next, I will focus on introducing the concealment function f. Similar to the previous section, we use a grid map to represent the environment. 
+    In the optimization of this section, each grid cell stores the steepness at that location, which corresponds to the terrain difference mentioned in the previous section. 
+    To enhance the concealment of the trajectory, we aim to maximize the terrain difference at every point on the trajectory. 
+    Therefore, the concealment function is defined as f = -h, where f represents the concealment and h represents the terrain difference.
+    To facilitate subsequent gradient-based numerical optimization, the gradient of concealment with respect to position was derived analytically. 
+    In practice, since this project uses a discrete grid map to represent the environment, it inherently suffers from discontinuities, 
+    which is not conducive to optimization computations. To address this issue, bilinear interpolation is employed to smooth out the discontinuities caused by the discrete grid representation.</p>
 
+
+  <div class="center">
+      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_5.png?raw=true" alt="">
+  </div>
+
+
+  <p>With the above method, we can approximately and analytically compute the concealment value at any point coordinate in the input map, which is beneficial for subsequent numerical optimization. In the actual optimization process, 
+    to handle the continuous-time constraints in the optimization problem, each constraint is discretized. The constraints are approximated by imposing them on the discrete points to ensure that the entire trajectory satisfies the constraints. Ultimately, the inequality constraints are transformed into penalty terms applied to the original objective function.
+    By discretizing the constraints and using penalty terms, the optimization problem can be formulated as a constrained optimization problem, 
+    where the constraints are enforced through the penalty terms. This allows for the application of numerical optimization 
+    techniques to find an optimal trajectory that satisfies the given constraints while minimizing the objective function.</p>
+  
+  
 
      <h2>Simulation Verification</h2>
-  <div class="center">
-      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/fb27cd3045091bd28d09e42ff86885a3bf5f687e/_pages/terrain_3.png?raw=true" alt="">
-  </div>
+    <div class="center">
+        <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/fb27cd3045091bd28d09e42ff86885a3bf5f687e/_pages/terrain_3.png?raw=true" alt="">
+    </div>
     <p>The aim here is to ensure that the drone maintains a line of sight to the target during the tracking mission.
     A key contribution of this subsection is the development of a sector-shaped visible region for each predicted position of the target.
     This visible region is designed to account for potential occlusions and to guide the drone in maintaining an optimal position for visibility. 
@@ -144,23 +165,6 @@ redirect_from:
       flights, enhancing the realism of our training data.</p>
 
     <img src="https://github.com/mengze3/mengze3.github.io/blob/629a88ce29542fd2cee39b2c2a2153936f48cf86/_pages/new_detect.png?raw=true" alt="improved detection">
-    <table border="1">
-    <tr>
-      <th style="text-align: center;"></th>
-      <th style="text-align: center;">original detection</th>
-      <th style="text-align: center;">improved detection</th>
-    </tr>
-    <tr>
-      <td style="text-align: center;">Precision(%)</td>
-      <td style="text-align: center;">63</td>
-      <td style="text-align: center;">98</td>
-    </tr>
-    <tr>
-      <td style="text-align: center;">Recall(%)</td>
-     <td style="text-align: center;">36</td>
-      <td style="text-align: center;">97</td>
-    </tr>
-  </table>
     <p>    Through persistent efforts and optimization, our image recognition accuracy experienced a substantial boost, with recall rates increasing from 36% to 97% and precision surging from 68% to 98%.
       This remarkable improvement has significantly bolstered the robustness of our robot tracking. Particularly noteworthy is that when the confidence (threshold) is set at 0.5, 
       the system demonstrates exceptionally high reliability and efficiency.</p>
