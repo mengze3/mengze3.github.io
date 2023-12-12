@@ -75,7 +75,7 @@ redirect_from:
       Here, the terrain difference will be defined as the elevation difference within a prescribed square area centered on the state points.</p>
 
     <div class="center">
-      <img  src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_1.png?raw=true" alt="">
+      <img  width="200" height="150"src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_1.png?raw=true" alt="">
     </div>
 
 
@@ -93,22 +93,42 @@ redirect_from:
 
 
    <h2>Gradient-Based Efficient Trajectory Optimization</h2>
+    <p>In reality, due to limitations in sampling resolution and the number of samples, the trajectory obtained in the previous section is relatively coarse. 
+      Some segments of the trajectory may not be kinematically feasible and may even pose a collision risk. Therefore, in this section, 
+      we aim to improve the smoothness and feasibility of the trajectory by using the previous path as an initial guess and applying optimization-based methods to deform the path in continuous space.
+    In this chapter, we parameterize the trajectory using piecewise polynomials, denoted as p(s). Each segment of the trajectory is represented by pi(s), 
+    where i refers to the i-th segment. In this project, the optimization formulation for trajectory planning is as follows:</p>
+
   <div class="center">
-      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp2.PNG?raw=true" alt="">
+    <img  src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_2.png?raw=true" alt="">
   </div>
-    <p>This section discusses the generation of a safe flight corridor (SFC) that the drone can follow without colliding with obstacles.
-Previous methods in safe flight corridor generation often faced limitations, especially in complex environments where the drone must maneuver through tight spaces or avoid moving obstacles.
-I utilize a novel approach to generate a more flexible and safer corridor, which adapts to the environment and the drone's dynamic constraints, ensuring a higher level of safety during flight.</p>
+
+  <p>In the formulation, d represents the dimension of the control variable, and the integral term has the physical interpretation of minimizing energy to improve trajectory smoothness. 
+    In the implementation details, d is set to 3, which means minimizing the jerk (rate of change of acceleration) of the trajectory. 
+    f denotes the concealment function, which aims to guide the trajectory towards areas with higher concealment. 
+    Gcos is the obstacle avoidance function, which aims to keep the trajectory away from restricted areas such as mountains by constructing an Euclidean signed distance field. 
+    Intuitively, we can estimate the distance value and gradient at each point to push the entire trajectory away from restricted areas. 
+    kmax represents the maximum curvature of the trajectory to ensure nonholonomic dynamics.
+    To ensure continuity throughout the motion, high-order continuity is required at the connection points between adjacent polynomials. 
+    This continuity is denoted as D. To eliminate the equality constraints in the optimization formulation, this project uses the MINCO trajectory class to replace traditional piecewise polynomials without any special features. 
+    The advantage of this trajectory class is that it can transform the parameter space of piecewise polynomials from polynomial coefficients and time to path points and "time" while satisfying the condition of minimum energy. 
+    The transformation is illustrated in the figure below:</p>
+
+
+  <div class="center">
+    <img  src="https://github.com/mengze3/mengze3.github.io/blob/fb27cd3045091bd28d09e42ff86885a3bf5f687e/_pages/terrain_4.png?raw=true" alt="">
+  </div>
+    
 
 
      <h2>Simulation Verification</h2>
   <div class="center">
-      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/d329c78ee436329701cc9e32fb3e3280a55856a0/_pages/srtp3.PNG?raw=true" alt="">
+      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/fb27cd3045091bd28d09e42ff86885a3bf5f687e/_pages/terrain_3.png?raw=true" alt="">
   </div>
     <p>The aim here is to ensure that the drone maintains a line of sight to the target during the tracking mission.
-A key contribution of this subsection is the development of a sector-shaped visible region for each predicted position of the target.
-This visible region is designed to account for potential occlusions and to guide the drone in maintaining an optimal position for visibility. 
-      It is a crucial part of the system, ensuring that the target remains within the drone's field of view throughout the tracking process.</p>
+    A key contribution of this subsection is the development of a sector-shaped visible region for each predicted position of the target.
+    This visible region is designed to account for potential occlusions and to guide the drone in maintaining an optimal position for visibility. 
+    It is a crucial part of the system, ensuring that the target remains within the drone's field of view throughout the tracking process.</p>
 
 
     <h1>Learning-Aided Fixed-Wing Long-Range Covert Flight Optimization </h1>
