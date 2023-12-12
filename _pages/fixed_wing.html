@@ -130,7 +130,7 @@ redirect_from:
 
 
   <div class="center">
-      <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_5.png?raw=true" alt="">
+      <img  width="640" height="480" src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_5.png?raw=true" alt="">
   </div>
 
 
@@ -144,14 +144,23 @@ redirect_from:
 
      <h2>Simulation Verification</h2>
     <div class="center">
-        <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/fb27cd3045091bd28d09e42ff86885a3bf5f687e/_pages/terrain_3.png?raw=true" alt="">
+        <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/a9ba1b1f13f37431ac4b6d4cc6039e7cd573659e/_pages/terrain_6.png?raw=true" alt="">
     </div>
-    <p>The aim here is to ensure that the drone maintains a line of sight to the target during the tracking mission.
-    A key contribution of this subsection is the development of a sector-shaped visible region for each predicted position of the target.
-    This visible region is designed to account for potential occlusions and to guide the drone in maintaining an optimal position for visibility. 
-    It is a crucial part of the system, ensuring that the target remains within the drone's field of view throughout the tracking process.</p>
+    <p>I simulated based on a real geographical environment and constructed a height map that exists in the real world. 
+      I used the Unreal Engine for terrain rendering, and the final simulation result is shown in the image below.</p>
 
 
+    <div class="center">
+        <img  width="480" height="360" src="https://github.com/mengze3/mengze3.github.io/blob/a9ba1b1f13f37431ac4b6d4cc6039e7cd573659e/_pages/terrain_8.png?raw=true" alt="">
+    </div>
+  
+
+    <p>In the image, the bluer the color, the higher the terrain elevation and the higher the concealment in the surrounding area. 
+      The black line represents the path output by the front-end RRT* algorithm, while the yellow line represents the trajectory further optimized through back-end numerical optimization. 
+      From the image, we can observe that while ensuring the kinematic feasibility of the trajectory, 
+      the yellow curve will try to closely follow the mountainous regions (light blue-green areas) to achieve high concealment flight.</p>
+
+  
     <h1>Learning-Aided Fixed-Wing Long-Range Covert Flight Optimization </h1>
   
     <img src="https://github.com/mengze3/mengze3.github.io/blob/85ed4283c001b95214b7627a670d0f036b9bd630/_pages/old_detect.png?raw=true" alt="original detection">
