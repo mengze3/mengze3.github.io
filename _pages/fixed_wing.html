@@ -44,7 +44,7 @@ redirect_from:
 
     <h1>Neural Path Planning</h1>
     <div class="center">
-      <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
+      <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/421c4b5c5f81165712a7c560a546eac8570d416b/_pages/model2.png?raw=true" alt="">
   </div>
     <p>A neural network path planner was proposed to learn data for trajectory optimization. It reads information from maps and poses. The structure is divided into three layers: 
       feature extraction layer, global distribution layer, and local correction layer. The feature extraction layer is used to extract information from maps and poses; 
@@ -52,18 +52,18 @@ redirect_from:
       This approach has three advantages. First, because it is a neural network, its inference speed is relatively stable. Second, the neural network size can be made very small, enhancing its efficiency. 
       Third, since it learns data from backend trajectory optimization, it takes into account the process of backend trajectory optimization, 
       providing a better initial value for the backend. I have applied this method on Ackerman vehicles and achieved certain results.</p>
-    <!-- 大标题 -->
+
+
+
+  
     <h1>Fixed-Wing Long-Range Covert Flight </h1>
-    <div class="center">
-      <img  width="840" height="540" src="https://github.com/mengze3/mengze3.github.io/blob/11d20e3403392d78c85e76b223132dde30c84f6a/_pages/model1.png?raw=true" alt="">
-  </div>
-<p>The generation of global trajectories for fixed-wing aircraft follows a hierarchical framework. Initially, a sampling-based dynamic path planning algorithm is used, 
-  targeting exploration within the global environment to find a better path topology. The paths generated in this step are not smooth and may not be entirely dynamically feasible. 
-  To address this issue, a numerical optimization-based algorithm is employed to further optimize the output of the previous step in the continuous state space. 
-  This ensures stealth in flight while effectively improving the smoothness and dynamic feasibility of the trajectory. 
-  Due to the order of magnitude difference in the map size and the altitude range of the aircraft, the trajectory planning problem is modeled as a two-dimensional trajectory generation problem. 
-  Here, the aircraft is set to maintain a constant altitude of 60 meters, 
-  with a flight speed of 150 meters per second. Mountainous terrains on the map exceeding 60 meters in height are treated as impassable obstacles.</p>
+  <p>The generation of global trajectories for fixed-wing aircraft follows a hierarchical framework. Initially, a sampling-based dynamic path planning algorithm is used, 
+    targeting exploration within the global environment to find a better path topology. The paths generated in this step are not smooth and may not be entirely dynamically feasible. 
+    To address this issue, a numerical optimization-based algorithm is employed to further optimize the output of the previous step in the continuous state space. 
+    This ensures stealth in flight while effectively improving the smoothness and dynamic feasibility of the trajectory. 
+    Due to the order of magnitude difference in the map size and the altitude range of the aircraft, the trajectory planning problem is modeled as a two-dimensional trajectory generation problem. 
+    Here, the aircraft is set to maintain a constant altitude of 60 meters, 
+    with a flight speed of 150 meters per second. Mountainous terrains on the map exceeding 60 meters in height are treated as impassable obstacles.</p>
     
    <h2>Sampling-Based Global Covert Rough Path Planning</h2>
   <div class="center">
@@ -73,6 +73,23 @@ redirect_from:
       the loss function needs to be specifically designed based on the level of concealment provided by the environment, making covert paths more likely to be selected and integrated into the optimal trajectory.
       To achieve this effect, the project proposes to first conduct terrain estimation. During sampling, the terrain difference will be integrated along the trajectory between sampled state points to assess the level of concealment of the terrain. 
       Here, the terrain difference will be defined as the elevation difference within a prescribed square area centered on the state points.</p>
+
+    <div class="center">
+      <img  src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_1.png?raw=true" alt="">
+    </div>
+
+
+  <p>For any straight line connecting two nodes, the loss function for that line segment is defined as follows:</p>
+
+
+  <div class="center">
+    <img  src="https://github.com/mengze3/mengze3.github.io/blob/c78ae6bc22e32ff20df7cb4e361a9175cdabb338/_pages/terrain_2.png?raw=true" alt="">
+  </div>
+
+
+  <p>In the equation, w represents the weight that measures the importance of concealment, and p(s) denotes the coordinates of a point on the straight line. 
+    It can be observed that when the weight w is set to 0, the loss function reduces to the length of the line segment. 
+    However, when the weight is non-zero, the greater the difference in terrain, the smaller the loss value for that point.</p>
 
 
    <h2>Gradient-Based Efficient Trajectory Optimization</h2>
