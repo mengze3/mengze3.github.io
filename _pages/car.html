@@ -51,17 +51,17 @@ redirect_from:
     <h1>Contributions</h1>
     <p>• We propose a lightweight two-stage neural network that is capable of learning a path connecting the start and goal SE(2) states directly from the environment. 
       A salient feature of our algorithm is its independence from tradi-tional sampling or search algorithms, which significantly enhances time efficiency and temporal stability. 
-      Further-more, our network is adept at learning the paradigms of ground truth trajectories, thereby providing superior initial path for optimization. 
+      Furthermore, our network is adept at learning the paradigms of ground truth trajectories, thereby providing superior initial path for optimization. 
       This capability significantly reduces the back-end computational load and required optimization time.</p>
   
-    <p>• We devise a distinctive trajectory formulation character-ized by a dual-layer, piece-wise polynomial architecture, 
+    <p>• We devise a distinctive trajectory formulation characterized by a dual-layer, piece-wise polynomial architecture, 
       upon which we construct a differential flatness-based spatial-temporal joint trajectory optimization formulation. 
       This methodology is adept at not only facilitating the efficient generation of superior, collision-free trajectories but also at addressing the intrinsic ambiguities associated with flatness models, 
-      thus augmenting the completeness. Furthermore, we meticulously derive the gradient propa-gation chain within this trajectory representation, 
+      thus augmenting the completeness. Furthermore, we meticulously derive the gradient propagation chain within this trajectory representation, 
       which empowers the proficient employment of gradient-based numerical optimization techniques.</p>
 
     <p>• We amalgamate the proposed front-end and back-end components to present a high-quality vehicle trajectory planner. Moreover, 
-      we employ an iterative modal plan-ning algorithm to efficaciously mitigate the transitions between forward and reverse motions during vehicle ma-neuvering. 
+      we employ an iterative modal planning algorithm to efficaciously mitigate the transitions between forward and reverse motions during vehicle maneuvering. 
       Additionally, we conduct a series of ablation studies to meticulously analyze the contribution of each component, 
       and comparative experiments are undertaken to validate the superiority of our algorithm.</p>
   
@@ -69,7 +69,7 @@ redirect_from:
     <h1>LEARNING-BASED PATH PLANNING</h1>
 
   <p>
-In this section, we introduce the learning-based path planner that leverages the performance of the network to directly output an initial path for optimization without the need for additional sampling or searching. 
+	In this section, we introduce the learning-based path planner that leverages the performance of the network to directly output an initial path for optimization without the need for additional sampling or searching. 
       Our path planner takes as input the navigation start ${x}^p_i$ and goal ${x}^p_N$, 
       as well as the grid-based environment $\mathcal{E}$ of size $H*W$, and directly outputs a path $ {\mathrm{p}} =
     \{ {x}^p_1,...,{x}^p_i,...,{x}^p_N\} $ serialized as a sequence of multiple state points.
@@ -85,7 +85,7 @@ In this section, we introduce the learning-based path planner that leverages the
       <img  width="1040" height="680" src="https://github.com/mengze3/mengze3.github.io/blob/c5ee3b2ab134c71729fdb51c8c76b3df9e1ae025/_pages/model2.png?raw=true" alt="">
   </div>
    
-  <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer, as illustrated in Fig. \ref{fig:network}.
+  <p>Our network comprises three main components: the feature extraction layer, the global distribution layer, and the local correction layer.
 	In practice, directly localizing the position of a specific state point within the environment is challenging and labor-intensive. Therefore, drawing inspiration from the R-CNN, our network follows a two-stage inference architecture.
 	Initially, we uniformly partition $\mathcal{E}$ into $H_l * W_l$ region proposals, where each region proposal corresponds to a block of size $\frac{H}{H_l} * \frac{W}{W_l}$ in the environment. The center point of each region proposal is designated as an anchor point.
 	Subsequently, we employ the global distribution layer to obtain the probability distribution of each state point with respect to the region proposals. This step involves estimating the coarse spatial distribution of the point. Next, leveraging the local correction layer, we further obtain the accurate position of the state point based on the environmental features and the probability distribution obtained earlier.
@@ -96,7 +96,7 @@ In this section, we introduce the learning-based path planner that leverages the
 	We adopt a start-goal encoding strategy by highlighting patches of size $c*c$ on a tensor of size $H*W$. Specifically, we assign a value of -1 to the patch representing the start point and a value of 1 to the patch representing the goal point. The remaining positions in the tensor are set as $0$.
 	To fully represent the $\mathbb{SE}(2)$ space, we introduce two additional $H*W$ tensors to capture the cosine and sine values of the robot orientations at the start and goal locations.
 	Specifically, one tensor represents the cosine values for the patches corresponding to the starting and target points, while the other tensor represents the sine values.
-	Subsequently, the aforementioned representations of the environment and the start and goal $\mathbb{SE}(2)$ states are concatenated to form a $4*H*W$ tensor, which serves as the input to the feature extraction layer of our model. The feature extraction layer consists of a Fully Convolutional Network (FCN) and a Transformer Encoder ~\cite{vaswani2017attention}. The FCN encodes path plan problem into a high-dimensional latent space, and the size of this latent feature is downsampled to $d*H_l*W_l$ to match the shape of the probability distribution of region proposals. Here, $d$ represents the user-defined dimension of the latent features. Next, we apply the transformer module to further fuse the features within the latent space, without altering the shape of the feature tensor. For brevity, we denote the output of the feature extraction layer as $\mathcal{M}$.
+	Subsequently, the aforementioned representations of the environment and the start and goal $\mathbb{SE}(2)$ states are concatenated to form a $4*H*W$ tensor, which serves as the input to the feature extraction layer of our model. The feature extraction layer consists of a Fully Convolutional Network (FCN) and a Transformer Encoder. The FCN encodes path plan problem into a high-dimensional latent space, and the size of this latent feature is downsampled to $d*H_l*W_l$ to match the shape of the probability distribution of region proposals. Here, $d$ represents the user-defined dimension of the latent features. Next, we apply the transformer module to further fuse the features within the latent space, without altering the shape of the feature tensor. For brevity, we denote the output of the feature extraction layer as $\mathcal{M}$.
 	$\mathcal{M}$ is further inputted to the global distribution layer, resulting in the probability distribution map $\mathcal{P}$ over the region proposals for $N$ points along the path, with a size of $N*H_l*W_l$. 
 	Here, we denote the probability of the $i$-th point belonging to the $(j,k)$-th  region as $\varrho_{i,j,k}$. Moreover, it is evident that these probabilities should satisfy the principle of probability normalization:
 	\begin{align}
@@ -463,8 +463,8 @@ In this section, we introduce the learning-based path planner that leverages the
 	$u=3$ is the control dimension and $\rho\in \mathbb{R}^+$ is a user-defined weight for
 	the time regularization term to restrict the total duration $T_s$. Eq. (\ref{eq:initial_boundary}) and Eq. (\ref{eq:final_boundary}) represent the initial and final state constraints of the trajectory, 
 	respectively. Eq. (\ref{eq:continuityrs})(\ref{eq:continuityscale}) denotes the continuity constraints up to degree $\widetilde{d}$ at the junctions of the piece-wise 
-	polynomials. Eq. (\ref{eq:temporal}) and Eq. (\ref{eq:scale}) correspond to positive-definite constraints on time and \textit{Pseudo Velocity}, respectively. Eq. (\ref{eq:mini vel}) is a minimum
-	\textit{Pseudo Velocity} constraint introduced to avoid singularities, where $\alpha$ is a threshold value. $\mathcal{G}$ encompasses common inequality constraints considered in trajectory planning problems, 
+	polynomials. Eq. (\ref{eq:temporal}) and Eq. (\ref{eq:scale}) correspond to positive-definite constraints on time and <i>Pseudo Velocity</i>, respectively. Eq. (\ref{eq:mini vel}) is a minimum
+	<i>Pseudo Velocity</i> constraint introduced to avoid singularities, where $\alpha$ is a threshold value. $\mathcal{G}$ encompasses common inequality constraints considered in trajectory planning problems, 
 	including dynamic feasibility and obstacle avoidance constraints, the specific forms of which can be found in our previous work.</p>	
 
 
