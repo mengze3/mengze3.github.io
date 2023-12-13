@@ -466,7 +466,46 @@ In this section, we introduce the learning-based path planner that leverages the
 	polynomials. Eq. (\ref{eq:temporal}) and Eq. (\ref{eq:scale}) correspond to positive-definite constraints on time and \textit{Pseudo Velocity}, respectively. Eq. (\ref{eq:mini vel}) is a minimum
 	\textit{Pseudo Velocity} constraint introduced to avoid singularities, where $\alpha$ is a threshold value. $\mathcal{G}$ encompasses common inequality constraints considered in trajectory planning problems, 
 	including dynamic feasibility and obstacle avoidance constraints, the specific forms of which can be found in our previous work.</p>	
-    
+
+
+      <h2>C.  Iterative Modal Planning</h2>
+
+
+	<div class="center">
+	<img  width="640" height="320" src="https://github.com/mengze3/mengze3.github.io/blob/6a151e483d8b7762fbe741bc06ba24fee921969e/_pages/iterative.png?raw=true" alt="">
+	</div>
+
+	<p>Thus far, we have successfully accomplished the model-
+	ing and solution of trajectory optimization. Nonetheless, the
+	forward and backward characteristics of individual trajectory
+	segments are determined by the coarse frontend, potentially
+	leading to superfluous mode transitions. These transitions
+	impose unwarranted expenditures of energy and time, while
+	also contributing to tire wear. To tackle this challenge, we
+	propose an iterative mechanism aimed at eliminating un-
+	necessary mode switches, thereby facilitating the automatic
+	search of optimal modal sequences, as depicted in Alg. 1.
+	Initially, we employ the output of our path planning algorithm
+	as the initial mode sequence, and proceed with trajectory
+	optimization. Within each iteration, we efficiently examine the
+	horizon of each trajectory segment and heuristically attempt to
+	remove segments with a horizon Ti smaller than a predefined
+	threshold ε. Furthermore, we merge the (i−1)-th and (i+1)-th
+	trajectory segments since they inevitably belong to the same
+	mode. Subsequently, the pruned and restructured trajectory
+	serve as the initial guess for subsequent optimization. Besides,
+	we subject the optimized trajectory to feasibility checks. In
+	the event of an infeasible solution, indicating the absence of a
+	viable solution under the current mode configuration, we revert
+	to the feasible trajectory output from the previous iteration,
+	even if it entails a higher frequency of transitions. Conversely,
+	if the optimized trajectory satisfies the feasibility check, the
+	iterative process continues until the horizon of each trajectory
+	segment surpasses a predetermined threshold, signifying the
+	necessity of every transition.
+	</p>
+
+	
 
 	<h1>EVALUATIONS</h1>
 
