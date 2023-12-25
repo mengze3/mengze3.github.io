@@ -123,11 +123,6 @@ redirect_from:
     which is not conducive to optimization computations. To address this issue, bilinear interpolation is employed to smooth out the discontinuities caused by the discrete grid representation.</p>
 
 
-  <div class="center">
-      <img  width="640" height="640" src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_5.png?raw=true" alt="">
-  </div>
-
-
   <p>With the above method, we can approximately and analytically compute the concealment value at any point coordinate in the input map, which is beneficial for subsequent numerical optimization. In the actual optimization process, 
     to handle the continuous-time constraints in the optimization problem, each constraint is discretized. The constraints are approximated by imposing them on the discrete points to ensure that the entire trajectory satisfies the constraints. Ultimately, the inequality constraints are transformed into penalty terms applied to the original objective function.
     By discretizing the constraints and using penalty terms, the optimization problem can be formulated as a constrained optimization problem, 
