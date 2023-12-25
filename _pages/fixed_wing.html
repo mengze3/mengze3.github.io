@@ -82,7 +82,7 @@ redirect_from:
 
 
   <p>In the equation, w represents the weight that measures the importance of concealment, and p(s) denotes the coordinates of a point on the straight line. 
-    It can be observed that when the weight w is set to 0, the loss function reduces to the length of the line segment. 
+    It can be observed that when the weight <i>w</i> is set to 0, the loss function reduces to the length of the line segment. 
     However, when the weight is non-zero, the greater the difference in terrain, the smaller the loss value for that point.</p>
 
 
@@ -90,21 +90,21 @@ redirect_from:
     <p>In reality, due to limitations in sampling resolution and the number of samples, the trajectory obtained in the previous section is relatively coarse. 
       Some segments of the trajectory may not be kinematically feasible and may even pose a collision risk. Therefore, in this section, 
       we aim to improve the smoothness and feasibility of the trajectory by using the previous path as an initial guess and applying optimization-based methods to deform the path in continuous space.
-    In this chapter, we parameterize the trajectory using piecewise polynomials, denoted as p(s). Each segment of the trajectory is represented by pi(s), 
-    where i refers to the i-th segment. In this project, the optimization formulation for trajectory planning is as follows:</p>
+    In this chapter, we parameterize the trajectory using piecewise polynomials, denoted as <i>p(s)</i>. Each segment of the trajectory is represented by <i>pi(s)</i>, 
+    where <i>i</i> refers to the <i>i-th</i> segment. In this project, the optimization formulation for trajectory planning is as follows:</p>
 
   <div class="center">
     <img  width="400" height="300" src="https://github.com/mengze3/mengze3.github.io/blob/2bf7324dc54aafe9193b5842895036fc10f3af8f/_pages/terrain_3.png?raw=true" alt="">
   </div>
 
-  <p>In the formulation, d represents the dimension of the control variable, and the integral term has the physical interpretation of minimizing energy to improve trajectory smoothness. 
-    In the implementation details, d is set to 3, which means minimizing the jerk (rate of change of acceleration) of the trajectory. 
-    f denotes the concealment function, which aims to guide the trajectory towards areas with higher concealment. 
-    Gcos is the obstacle avoidance function, which aims to keep the trajectory away from restricted areas such as mountains by constructing an Euclidean signed distance field. 
+  <p>In the formulation, <i>d</i> represents the dimension of the control variable, and the integral term has the physical interpretation of minimizing energy to improve trajectory smoothness. 
+    In the implementation details, <i>d</i> is set to 3, which means minimizing the jerk (rate of change of acceleration) of the trajectory. 
+    <i>f</i> denotes the concealment function, which aims to guide the trajectory towards areas with higher concealment. 
+    <i>Gcos</i> is the obstacle avoidance function, which aims to keep the trajectory away from restricted areas such as mountains by constructing an Euclidean signed distance field. 
     Intuitively, we can estimate the distance value and gradient at each point to push the entire trajectory away from restricted areas. 
-    kmax represents the maximum curvature of the trajectory to ensure nonholonomic dynamics.
+    <i>kmax</i> represents the maximum curvature of the trajectory to ensure nonholonomic dynamics.
     To ensure continuity throughout the motion, high-order continuity is required at the connection points between adjacent polynomials. 
-    This continuity is denoted as D. To eliminate the equality constraints in the optimization formulation, this project uses the MINCO trajectory class to replace traditional piecewise polynomials without any special features. 
+    This continuity is denoted as <i>D</i>. To eliminate the equality constraints in the optimization formulation, this project uses the <i>MINCO</i> trajectory class to replace traditional piecewise polynomials without any special features. 
     The advantage of this trajectory class is that it can transform the parameter space of piecewise polynomials from polynomial coefficients and time to path points and "time" while satisfying the condition of minimum energy. 
     The transformation is illustrated in the figure below:</p>
 
@@ -114,10 +114,10 @@ redirect_from:
   </div>
     
   <p>This method reduces the number of optimization variables in trajectory planning and eliminates equality constraints, greatly increasing planning efficiency. 
-    Next, I will focus on introducing the concealment function f. Similar to the previous section, we use a grid map to represent the environment. 
+    Next, I will focus on introducing the concealment function <i>f</i>. Similar to the previous section, we use a grid map to represent the environment. 
     In the optimization of this section, each grid cell stores the steepness at that location, which corresponds to the terrain difference mentioned in the previous section. 
     To enhance the concealment of the trajectory, we aim to maximize the terrain difference at every point on the trajectory. 
-    Therefore, the concealment function is defined as f = -h, where f represents the concealment and h represents the terrain difference.
+    Therefore, the concealment function is defined as <i>f = -h</i>, where <i>f</i> represents the concealment and <i>h</i> represents the terrain difference.
     To facilitate subsequent gradient-based numerical optimization, the gradient of concealment with respect to position was derived analytically. 
     In practice, since this project uses a discrete grid map to represent the environment, it inherently suffers from discontinuities, 
     which is not conducive to optimization computations. To address this issue, bilinear interpolation is employed to smooth out the discontinuities caused by the discrete grid representation.</p>
