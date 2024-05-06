@@ -31,6 +31,6 @@ Fixed-Wing Long-Range Flight Optimization
 ======
 * June 2023 - Nov 2023: Research Assistant
   * Duties included:
-    * DJI cooperation
+    * Benchmark
     * Terrain data generation and model training
   * Supervisor: Professor Fei Gao
