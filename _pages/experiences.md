@@ -11,7 +11,7 @@ redirect_from:
 
 Vision-Based Object Tracking for UAV in National-level Student Research Training Program (SRTP)
 ======
-* Apr 2022 - Jun 2023: Group Leader ([report](https://mengze3.github.io/srtp/))
+* Apr 2022 - Jun 2023: Group Leader 
   * Duties included:
     * Development of a complete UAV system by integrating key components
     * Image recognition
@@ -20,16 +20,16 @@ Vision-Based Object Tracking for UAV in National-level Student Research Training
 
 Transformer-based Trajectory Planning for Robots: Extending to UAVs and UGVs
 ======
-* June 2023 - Nov 2023: Research Assistant([report](https://mengze3.github.io/car/))
+* June 2023 - Nov 2023: Research Assistant
   * Duties included:
     * Optimization of the network structure
     * Benchmark
     * Training the network
   * Supervisor: Professor Fei Gao
  
-Fixed-Wing Long-Range Covert Flight Optimization in Collaboration between DJI and Fast Lab
+Fixed-Wing Long-Range Flight Optimization
 ======
-* June 2023 - Nov 2023: Research Assistant([report](https://mengze3.github.io/fixed_wing/))
+* June 2023 - Nov 2023: Research Assistant
   * Duties included:
     * DJI cooperation
     * Terrain data generation and model training
