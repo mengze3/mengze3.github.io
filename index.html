@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mengze Tian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 64px 0 48px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .avatar {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid #e8e8e8;
+    }
+
+    .header-text h1 {
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .header-links a + a::before {
+      content: '/';
+      margin-right: 4px;
+      color: #bbb;
+    }
+
+    .header-links a {
+      font-size: 14px;
+      color: #444;
+      border-bottom: 1px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .header-links a:hover {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom-color: #2563eb;
+    }
+
+    /* ── About ── */
+    .about {
+      margin-bottom: 56px;
+    }
+
+    .about p {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.85;
+      max-width: 680px;
+    }
+
+    /* ── Section heading ── */
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    /* ── Projects ── */
+    .projects {
+      margin-bottom: 80px;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 11fr 9fr;
+      gap: 28px;
+      margin-bottom: 44px;
+      align-items: start;
+    }
+
+    .project-video {
+      aspect-ratio: 16 / 9;
+      background: #f3f3f3;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #e8e8e8;
+    }
+
+    .project-video--square {
+      aspect-ratio: 1 / 1;
+    }
+
+    .project-video video,
+    .project-video iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-info h3 {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .project-meta {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .venue-highlight {
+      color: #c0392b;
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    .co-first {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .project-tags a {
+      font-size: 12px;
+      padding: 2px 11px;
+      border: 1px solid #c7d7f7;
+      border-radius: 20px;
+      color: #2563eb;
+      background: #f0f5ff;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .project-tags a:hover {
+      background: #2563eb;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid #e8e8e8;
+      padding: 24px 0 32px;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { padding: 40px 0 32px; }
+      .header-text h1 { font-size: 24px; }
+      .project { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="header-top">
+        <img class="avatar" src="assets/avatar" alt="Mengze Tian">
+        <div class="header-text">
+          <h1>Mengze Tian</h1>
+          <nav class="header-links">
+            <a href="mailto:mengze.tian@epfl.ch">Email</a>
+            <a href="https://scholar.google.com/citations?user=bHNTbREAAAAJ&hl=en" target="_blank">Google Scholar</a>
+            <a href="https://github.com/mengze3" target="_blank">GitHub</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <section class="about">
+      <p>
+        I am an MSc student in Mechanical Engineering at EPFL, advised by
+        <a href="https://calinon.ch" target="_blank">Sylvain Calinon</a> and
+        <a href="https://www.epfl.ch/labs/biorob/people/ijspeert/" target="_blank">Auke Ijspeert</a>.
+        My research focuses on robot learning across motion planning, manipulation, and locomotion.
+        Previously, I received my B.E. in Automation from Zhejiang University, where I worked with
+        <a href="https://ustfei.com/" target="_blank">Fei Gao</a>.
+      </p>
+    </section>
+
+    <section class="projects">
+      <h2>Research</h2>
+
+      <!-- Project 1 -->
+      <div class="project">
+        <div class="project-video">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/trajectory.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Hierarchically Depicting Vehicle Trajectory with Stability in Complex Environments</h3>
+          <p class="project-meta">Zhichao Han†, <strong>Mengze Tian†</strong> <span class="co-first">(co-first)</span>, Fei Gao*, et al. &nbsp;·&nbsp; <em class="venue-highlight">Science Robotics</em>, <span class="venue-highlight">2025</span></p>
+          <p class="project-desc">
+            We present a hierarchical approach that integrates the spatial extraction capabilities of neural networks with the robust convergence of numerical optimization, enabling efficient and stable trajectory generation in diverse environments.
+          </p>
+          <div class="project-tags">
+            <a href="https://www.science.org/doi/10.1126/scirobotics.ads4551" target="_blank">Paper</a>
+            <a href="https://github.com/ZJU-FAST-Lab/DPtraj" target="_blank">Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project">
+        <div class="project-video">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/spline_policy.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Spline Policy: A Structured Representation for Robot Policies</h3>
+          <p class="project-meta"><strong>Mengze Tian†</strong>, Yiming Li†, Sichao Liu, Auke Ijspeert, Sylvain Calinon &nbsp;·&nbsp; (under review)</p>
+          <p class="project-desc">
+            We propose Spline Policy, a structured policy representation that models robot behaviors as spline trajectories rather than discrete action chunks, supporting flexible temporal evaluation, parameter-space constraints, and uncertainty propagation.
+          </p>
+          <div class="project-tags">
+            <a href="https://arxiv.org/pdf/2606.07386" target="_blank">Paper</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project">
+        <div class="project-video">
+          <video autoplay loop muted playsinline>
+            <source src="assets/videos/salamander.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="project-info">
+          <h3>Learning Whole-Body Control for a Salamander Robot</h3>
+          <p class="project-meta"><strong>Mengze Tian†</strong>, Qiyuan Fu†, Chuanfang Ning, Javier Jia Jie Pey, Auke Ijspeert &nbsp;·&nbsp; (under review)</p>
+          <p class="project-desc">
+            We develop a reinforcement learning framework for coordinated axial–limb control on a highly articulated salamander robot, achieving stable sim-to-real transfer across flat and uneven terrains and hybrid terrestrial–aquatic locomotion.
+          </p>
+          <div class="project-tags">
+            <a href="https://arxiv.org/pdf/2603.16683" target="_blank">Paper</a>
+            <a href="https://www.youtube.com/watch?v=mMVRsBvLbYA" target="_blank">Video</a>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer>
+      <p>© 2026 Mengze Tian</p>
+    </footer>
+
+  </div>
+</body>
+</html>
